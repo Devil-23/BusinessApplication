@@ -1,0 +1,166 @@
+﻿@*@model BusinessApplication.RouteConfig*@
+
+@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("ExportReport", "TestReport", new { reportType = ViewBag.ReportType }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="">
+
+        <div class="Report-box">
+
+            <!-- general form elements -->
+
+            <div class="card card-primary mt-2">
+
+                <div class="Report-cardhead-sap">
+
+                    <h3 class="card-title">Report</h3>
+
+                </div>
+
+                <!-- /.card-header -->
+                <!-- form start -->
+
+                <form>
+
+                    <div class="card-body">
+
+                        <div class="row mb-3">
+
+                            <div class="">
+
+                                <div class="form-group">
+
+                                    <label class="mt-md-2">Reporting Year</label>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label>Job(s)</label>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label>Reporting Month</label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    @Html.DropDownList("BPYEAR", ViewBag.BPYEAR as SelectList, "Select Year", new { @Class = "form-control ", id="BPYEAR" })
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.DropDownList("JOBNO", ViewBag.JOBNO as SelectList, "Select JOBNO", new { @Class = "form-control",id="JOBNO" })
+                                    
+                                </div>
+
+                                <div class="form-group">
+
+                                    <select class="form-control select2" style="width: 100%;" name="month">
+
+                                        <option selected="selected">Month</option>
+
+                                        <option value="1">January</option>
+
+                                        <option value="2">February</option>
+
+                                        <option value="3">March</option>
+
+                                        <option value="4">April</option>
+
+                                        <option value="5">May</option>
+
+                                        <option value="6">June</option>
+
+                                        <option value="7">July</option>
+
+                                        <option value="8">August</option>
+
+                                        <option value="9">September</option>
+
+                                        <option value="10">Octomber</option>
+
+                                        <option value="11">November</option>
+
+                                        <option value="12">December</option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-3">
+
+                                <div class="form-check mt-md-2">
+
+                                    <input type="checkbox" class="form-check-input" id="galfarCheckbox">
+
+                                    <label class="form-check-label" for="galfarCheckbox">Galfar</label>
+
+                                </div>
+
+                                <div class="form-check mt-md-2">
+
+                                    <input type="checkbox" class="form-check-input" id="jvCheckbox">
+
+                                    <label class="form-check-label" for="jvCheckbox">JV</label>
+
+                                </div>
+
+                                <div class="form-check mt-md-2">
+
+                                    <input type="checkbox" class="form-check-input" id="anticipatedCheckbox">
+
+                                    <label class="form-check-label" for="anticipatedCheckbox">Anticipated</label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <hr />
+
+                    </div>
+                    <div class="card-footer-sap">
+
+                        <div class="col-md-4">
+
+                            <input type="submit" value="Show Report" class="btn btn-primary" />
+
+                        </div>
+
+                    </div>
+
+                    <!-- /.card-body -->
+
+                </form>
+
+            </div>  <!-- /.card -->
+
+        </div>
+
+    </div>
+
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css" />
+<script>
+       
+    $('#BPYEAR').chosen();
+    
+    $('#JOBNO').chosen();
+</script>

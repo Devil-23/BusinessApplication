@@ -1,0 +1,152 @@
+﻿@*@model IEnumerable<BusinessApplication.Models.TBL_BP_DICTIONARY>*@
+@model BusinessApplication.ViewModels.MultipleVM
+
+@{
+    ViewBag.Title = "Demoreport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Demoreport</h2>
+
+<p>
+    <a class="btn btn-primary" href="@Url.Action("Exportrpt")">Download Report</a>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+<table class="table">
+    <tr>
+        <!--<th>-->
+            @*@Html.DisplayNameFor(model => model.SDATE)*@
+            <!--SDATE
+        </th>
+        <th>-->
+            @*@Html.DisplayNameFor(model => model.FDATE)*@
+            <!--FDATE
+        </th>
+        <th>-->
+            @*@Html.DisplayNameFor(model => model.JOB_TITLE)*@
+            <!--JOB_TITLE
+        </th>
+        <th>-->
+            @*@Html.DisplayNameFor(model => model.DIVISION)*@
+            <!--DIVISION
+        </th>
+        <th>-->
+            @*@Html.DisplayNameFor(model => model.BP_MANAGER)*@
+            <!--BP_MANAGER
+        </th>
+        <th>-->
+            @*@Html.DisplayNameFor(model => model.MN_PROJECTION)*@
+            <!--MN_PROJECTION
+        </th>
+        <th>-->
+            @*@Html.DisplayNameFor(model => model.JOB_VOWD)*@
+            <!--JOB_VOWD
+        </th>
+        <th>-->
+            @*@Html.DisplayNameFor(model => model.JOB_PVOWD)*@
+            <!--JOB_PVOWD
+        </th>
+        <th>-->
+            @*@Html.DisplayNameFor(model => model.MN_CLOSE)*@
+        <!--</th>
+        <th>-->
+            @*@Html.DisplayNameFor(model => model.BP_OFFSHORE)*@
+        <!--</th>
+        <th>-->
+            @*@Html.DisplayNameFor(model => model.CLIENT)*@
+        <!--</th>
+        <th>-->
+            @*@Html.DisplayNameFor(model => model.LOCATION)*@
+        <!--</th>
+        <th>-->
+            @*@Html.DisplayNameFor(model => model.OT_PERCENT)*@
+        <!--</th>
+        <th>-->
+            @*@Html.DisplayNameFor(model => model.FUEL_PERCENT)*@
+        <!--</th>
+        <th>-->
+            @*@Html.DisplayNameFor(model => model.FOOD_STAFF)*@
+        <!--</th>
+        <th>-->
+            @*@Html.DisplayNameFor(model => model.FOOD_WORKER)*@
+        <!--</th>
+        <th>-->
+            @*@Html.DisplayNameFor(model => model.JOBTP)*@
+        <!--</th>
+        <th>-->
+            @*@Html.DisplayNameFor(model => model.ModifiedOn)*@
+        <!--</th>
+        <th>-->
+            @*@Html.DisplayNameFor(model => model.ModifiedBy)*@
+        <!--</th>
+        <th></th>-->
+    </tr>
+
+@foreach (var item in Model.DictListVM) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SDATE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FDATE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JOB_TITLE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIVISION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BP_MANAGER)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MN_PROJECTION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JOB_VOWD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JOB_PVOWD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MN_CLOSE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BP_OFFSHORE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CLIENT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LOCATION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OT_PERCENT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FUEL_PERCENT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FOOD_STAFF)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FOOD_WORKER)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JOBTP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedBy)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

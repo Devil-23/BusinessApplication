@@ -1,0 +1,149 @@
+﻿@model BusinessApplication.ViewModels.LayoutVM
+<div class="sidebar" id="sidebar">
+
+
+    <!-- SidebarSearch Form -->
+    <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+                <button class="btn btn-sidebar">
+                    <i class="fas fa-search fa-fw"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+            with font-awesome or any other icon font library -->
+            <li class="nav-item menu-open">
+
+            </li>
+
+
+            @foreach (var temp in Model.Year)
+            {
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>
+
+                            @temp
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+
+                            <a href="#" class="nav-link">
+                                &nbsp;&nbsp;
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>Bussiness Plan</p>
+                                <i class="right fas fa-angle-left"></i>
+                            </a>
+
+                            <ul class="nav nav-treeview"> 
+                                @foreach (var a in Model.JobNo)
+                                {
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link ">
+                                            &nbsp;&nbsp;&nbsp;
+                                            <i class="nav-icon fas fa-copy"></i>
+                                            <p>
+                                                @temp - @a &nbsp;
+                                            </p><a href="@Url.Action("Index", "File")"> <i class="fas fa-edit"></i></a>
+                                            <i class="right fas fa-angle-left"></i>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+
+                                                <a href="@Url.Action("Income", "Year")" class="nav-link">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <i class="fas fa-copy nav-icon"></i>
+                                                    <p>Income</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="@Url.Action("MaterialInHouse", "Year")" class="nav-link">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <i class="fas fa-copy nav-icon"></i>
+                                                    <p>Material(In House)</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="@Url.Action("MaterialBoughtOut", "Year")" class="nav-link">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <i class="fas fa-copy nav-icon"></i>
+                                                    <p>Material(Bought Out)</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="@Url.Action("Manpower", "Year")" class="nav-link">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <i class="fas fa-copy nav-icon"></i>
+                                                    <p>ManPower</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="@Url.Action("PlantGalfar", "Year")" class="nav-link">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <i class="fas fa-copy nav-icon"></i>
+                                                    <p>Plant Galfar</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="@Url.Action("PlantHire", "Year")" class="nav-link">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <i class="fas fa-copy nav-icon"></i>
+                                                    <p>Plant Hire</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="@Url.Action("Subcontract", "Year")" class="nav-link">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <i class="fas fa-copy nav-icon"></i>
+                                                    <p>Sub Contract</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="@Url.Action("GeneralExpenditure", "Year")" class="nav-link">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <i class="fas fa-copy nav-icon"></i>
+                                                    <p>General Expenditure</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="@Url.Action("Income", "Year")" class="nav-link">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <i class="fas fa-copy nav-icon"></i>
+                                                    <p>Previous Year</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="@Url.Action("Income", "Year")" class="nav-link">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <i class="fas fa-copy nav-icon"></i>
+                                                    <p>Next Year</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+}
+                            </ul>
+
+
+                        </li>
+                    </ul>
+
+                </li>
+            }
+
+
+
+    </nav>
+    <!-- /.sidebar-menu -->
+</div>

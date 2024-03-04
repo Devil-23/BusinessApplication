@@ -1,0 +1,65 @@
+﻿
+.sidebar-sap {
+    background-color: #e5edf6;
+}
+
+.nav-lin-sap {
+    color: #6c757d;
+}
+
+.sidebar a {
+    color: #6c757d !important;
+}
+
+.navbar-sap {
+    background-color: #e5edf6;
+}
+
+
+/*.table td {*/
+    /*padding: 0px !important;*/
+    /*padding: 0px;
+}*/
+
+
+/*card*/
+
+.card-header-sap {
+    background-color: #eff4f9;
+}
+
+.card-footer-sap {
+    background-color: #4e5963;
+    padding: 0.75rem 1.25rem;
+}
+
+/*#eff4f9*/
+
+/*
+
+form & buttons*/
+
+.btn-blue-sap {
+    background-color: #5496cd;
+    border-color: #5496cd;
+    color: #fff;
+}
+
+.form-control {
+    border-radius: 0px !important;
+}
+
+.Report-box {
+    width: 750px;
+    margin-left: 18%;
+}
+
+.Report-cardhead-sap {
+    background-color: #e5edf6;
+    padding: 0.75rem 0.25rem;
+}
+
+.Report-cardfooter-sap {
+    background-color: #4e5963;
+    padding: 0.15rem 1.25rem;
+}

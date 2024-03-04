@@ -1,0 +1,297 @@
+﻿@model BusinessApplication.ViewModels.MultipleVM
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PlantHire</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body class="hold-transition sidebar-mini">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-header-sap">
+                        @using (Html.BeginForm("PlantHire", "BP", new {area="BussinessPlan", year = ViewBag.Year, jobno = ViewBag.JobNo }, FormMethod.Post))
+                        {
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-sm-1">
+                                        <h1 class="card-title">[@ViewBag.Year - @ViewBag.JobNo : PlantHire]</h1>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @Html.ActionLink("Add Resource", "ResourceTools", "Tools", new {area="", year = ViewBag.Year, jobno = ViewBag.JobNo, resotype = "PH" }, new { @class = "btn btn-primary", year = ViewBag.Year, jobno = ViewBag.JobNo, resotype = "MP" })
+                                    </div>
+                                </div>
+                                <div class="card-tools">
+                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                        <input type="submit" value="Save" class="fas fa-save btn-save" />
+                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="modalid">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4>Resource Master</h4>
+                                        </div>
+                                        @* ---------------------------------------- *@
+                                        <div class="modal-body">
+                                            <div class="card" style="width:770px">
+                                                <div class="row pt-3" style="margin:2px">
+                                                    <div class="col-md-12 col-sm-12 col-12 p-2 ">
+                                                        <table id="tbl1" style="margin:3px" class="table table-bordered table-hover table-striped maintable">
+                                                            <thead>
+                                                            </thead>
+                                                            <tbody>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @* ---------------------------------------- *@
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="pagination">
+                                <label for="rowsPerPageSelect">Show: </label>
+                                <select id="rowsPerPage" class="select2">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                </select>
+                            </div>
+                            <div class="card-body table-responsive p-0">
+                                <table id="dtbl" class="table table-hover table-bordered table-striped text-nowrap">
+
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.ID)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.DESCRIPTION)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.UNIT)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.RATE)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.JAN)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.FEB)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.MAR)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.APR)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.MAY)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.JUN)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.JUL)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.AUG)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.SEP)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.OCT)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.NOV)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.DEC)
+                                        </th>
+
+
+                                    </tr>
+                                    @if (Model.InList != null)
+                                    {
+
+                                        for (int i = 0; i < Model.InList.Count; i++)
+                                        {
+                                            @Html.HiddenFor(modelItem => Model.InList[i].ID)
+                                            @Html.HiddenFor(modelItem => Model.InList[i].DESCRIPTION)
+                                            @Html.HiddenFor(modelItem => Model.InList[i].Unit)
+                                            @Html.HiddenFor(modelItem => Model.InList[i].Rate)
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => Model.InList[i].ID)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => Model.InList[i].DESCRIPTION)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => Model.InList[i].Unit)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => Model.InList[i].Rate)
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].JAN, new { @class = "form-control" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].FEB, new { @class = "form-control" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].MAR, new { @class = "form-control" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].APR, new { @class = "form-control" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].MAY, new { @class = "form-control" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].JUN, new { @class = "form-control" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].JUL, new { @class = "form-control" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].AUG, new { @class = "form-control" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].SEP, new { @class = "form-control" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].OCT, new { @class = "form-control" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].NOV, new { @class = "form-control" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].DEC, new { @class = "form-control" })
+                                                </td>
+
+
+                                            </tr>
+
+                                        }
+
+                                    }
+                                </table>
+                            </div>
+
+                        }
+                        <!-- /.card-body -->
+                    </div>
+                    <div class="card-footer">
+                        <span id="pageInfo">Page 1 of 1</span>
+
+                        <div class="float-right">
+                            <button id="prevPage">Previous</button>
+                            <button id="nextPage">Next</button>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+
+
+<script>
+    $(document).ready(function () {
+        $("#AddReso").click(function () {
+            $.get("/Tools/ResourceTools1", function (data) {
+                $("#modalid .modal-body").html(data);
+
+                $("#modalid").modal("show");
+            });
+        });
+    });
+
+
+
+    $(document).ready(function () {
+        //var selectedRowCount = 0; // 0 for "All" by default
+        var selectedRowCount = 5; // 0 for "All" by default
+        var currentPage = 0;
+
+        // Function to update the table based on the selected row count
+        function updateTable() {
+            var table = document.getElementById("dtbl");
+            var rows = table.getElementsByTagName("tr");
+
+            // Hide all rows
+            for (var i = 1; i < rows.length; i++) {
+                rows[i].style.display = "none";
+            }
+
+            // Calculate the range of rows to display on the current page
+            var start = currentPage * selectedRowCount + 1;
+            var end = Math.min((currentPage + 1) * selectedRowCount + 1, rows.length);
+
+            // Display the rows for the current page
+            for (var i = start; i < end; i++) {
+                rows[i].style.display = "";
+            }
+
+            // Update the page number and rows count
+            var totalRows = rows.length - 1;
+            var totalPages = Math.ceil(totalRows / selectedRowCount);
+            $("#pageInfo").text("Page " + (currentPage + 1) + " of " + totalPages + " (" + totalRows + " rows)");
+        }
+
+        // Function to update the row count and update the table
+        function updateRowCount() {
+            selectedRowCount = parseInt($("#rowsPerPage").val());
+            currentPage = 0; // Reset to the first page when changing row count
+            updateTable();
+        }
+
+        // Row count dropdown change event
+        $("#rowsPerPage").change(function () {
+            updateRowCount();
+        });
+
+        // Previous page button click
+        $("#prevPage").click(function () {
+            if (currentPage > 0) {
+                currentPage--;
+                updateTable();
+            }
+        });
+
+        // Next page button click
+        $("#nextPage").click(function () {
+            var table = document.getElementById("dtbl");
+            var rows = table.getElementsByTagName("tr");
+
+            if ((currentPage + 1) * selectedRowCount + 1 < rows.length) {
+                currentPage++;
+                updateTable();
+            }
+        });
+
+        // Initialize the table
+        updateTable();
+    });
+
+
+
+</script>

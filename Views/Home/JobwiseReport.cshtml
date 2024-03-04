@@ -1,0 +1,229 @@
+﻿
+@{
+    ViewBag.Title = "JobwiseReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        padding: 12px;
+        z-index: 1;
+    }
+
+        .dropdown-content label {
+            display: block;
+        }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Include Select2 CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css" rel="stylesheet" />
+
+<!-- Include Select2 JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
+
+
+
+@using (Html.BeginForm("ExportReport", "TestReport", new { reportType = ViewBag.ReportType }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="">
+
+        <div class="Report-box">
+
+            <!-- general form elements -->
+
+            <div class="card card-primary mt-2">
+
+                <div class="Report-cardhead-sap">
+
+                    <h3 class="card-title">Report</h3>
+
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form>
+                    <div class="card-body">
+
+                        <div class="row mb-3">
+
+                            <div class="">
+
+                                <div class="form-group">
+
+                                    <label class="mt-md-2">Reporting Year</label>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label>Job(s)</label>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-8">
+
+                                <div class="form-group">
+                                    @Html.DropDownList("BPYEAR", ViewBag.BPYEAR as SelectList, "Select Year", new { @Class = "form-control ", id = "BPYEAR" })
+                                  </div>
+
+
+                                <div class="form-group">
+                                    <div class="dropdown">
+                                        <button type="button" class="form-control " id="dropdownBtn">Select JOBNO</button>
+                                        <div class="dropdown-content " id="dropdownContent" style="height: 200px; overflow-y: scroll">
+                                            <input class="form-control" type="search" placeholder="Search" aria-label="Search" oninput="filterJobNumbers()">
+                                            @foreach (var item in ViewBag.JOBNO)
+                                            {
+                                                <label>
+                                                    <input type="checkbox" name="selectedJobNumbers" value="@item.Value" /> @item.Text
+                                                </label>
+                                                <br />
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                        <div class="card-footer-sap">
+
+                            <div class="col-md-4">
+
+                                <input type="submit" value="Show Report" class="btn btn-primary" />
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <!--<div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group" style="display:flex">
+                                    <label class="mt-md-2">Reporting Year</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                    @*<select class="form-control select2" style="width: 100%;">
+                            <option selected="selected">Year</option>
+
+                        </select>*@
+                    <!--@Html.DropDownList("BPYEAR", ViewBag.BPYEAR as SelectList, "Select Year", new { id = "BPYEAR" })
+
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-5">
+                            <div class="form-group" style="display:flex">
+                                <label>Job(s)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <div class="dropdown">
+                                    <button type="button" id="dropdownBtn">Select Items</button>
+                                    <div class="dropdown-content" id="dropdownContent" style="height:200px;overflow-y:scroll">
+                                        @foreach (var item in ViewBag.JOBNO)
+                                        {
+                                            <label>
+                                                <input type="checkbox" name="selectedJobNumbers" value="@item.Value" /> @item.Text
+                                            </label>
+                                            <br />
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />-->
+                    @*<div class="row">
+                            <div class="col-md-7"></div>
+                            <div class="col-md-2 mt-md-5">
+                                <button type="button" class="btn btn-primary">Show </button>
+                            </div>
+                            <div class="col-md-2 mt-md-5">
+                                <button type="submit" class="btn btn-primary">Download </button>
+                            </div>
+
+                        </div>*@
+                    <!--<div class="card-footer-sap">
+
+                            <div class="col-md-4">
+
+                                <input type="submit" value="Show Report" class="btn btn-primary" />
+
+                            </div>
+
+                        </div>
+
+                    </div>-->
+                    <!-- /.card-body -->
+
+                </form>
+            </div> <!-- /.card -->
+        </div>
+    </div>
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css" />
+<script>
+    $(document).ready(function () {
+        $("#dropdownBtn").click(function () {
+            $("#dropdownContent").toggle();
+        });
+
+        $(document).click(function (e) {
+            if (!$(e.target).closest('.dropdown').length) {
+                $("#dropdownContent").hide();
+            }
+        });
+
+
+    });
+
+    $('#BPYEAR').chosen();
+
+    function filterJobNumbers() {
+        var input, filter, labels, i, checkbox, text;
+        input = document.querySelector('.dropdown-content input[type="search"]');
+        filter = input.value.trim().toUpperCase();
+        labels = document.querySelectorAll('.dropdown-content label');
+        dropdownContent = document.getElementById('dropdownContent');
+
+        // Move the search box to the top
+        dropdownContent.insertBefore(input, dropdownContent.firstChild);
+
+        for (i = 0; i < labels.length; i++) {
+            checkbox = labels[i].querySelector('input[type="checkbox"]');
+            text = checkbox.nextSibling.textContent || checkbox.nextSibling.innerText;
+
+            // Check if the initial digits match the filter
+            if (text.trim().toUpperCase().startsWith(filter)) {
+                // Move the matching element to the top
+                dropdownContent.insertBefore(labels[i], dropdownContent.firstChild.nextSibling);
+                labels[i].style.display = "block";
+            } else {
+                labels[i].style.display = "none";
+            }
+        }
+    }
+</script>

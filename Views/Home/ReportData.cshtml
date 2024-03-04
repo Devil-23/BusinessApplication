@@ -1,0 +1,179 @@
+﻿@model BusinessApplication.ViewModels.MultipleVM
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Income</title>
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-header-sap">
+                       
+                            <div class="card-header">
+                                <h3 class="card-title">MonthWise Report</h3>
+
+                                @*<div class="card-tools">
+
+                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                        <input type="submit" value="Save" class="fas fa-save btn-save" />
+                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>*@
+                            </div>
+
+                            <!-- /.card-header -->
+                            <div class="row pt-3" style="margin: 2px;">
+                                @*<div class="col-md-12 col-sm-12 col-12 p-2 table-responsive">*@
+                                <div class=" p-2 table-responsive" style="overflow-x: auto;">
+                                    <div class="table-wrapper table-rs">
+                                        <table class="table table-hover table-bordered table-striped text-nowrap" id="dtHorizontalExample">
+
+                                            <tr>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.MonthRpt.ITM_TYPE)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.MonthRpt.ITM_ID)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.MonthRpt.ITM_DESCRIPTION)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.MonthRpt.AC_CUM)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.MonthRpt.AC_JAN)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.MonthRpt.AC_FEB)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.MonthRpt.AC_MAR)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.MonthRpt.AC_APR)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.MonthRpt.AC_MAY)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.MonthRpt.AC_JUN)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.MonthRpt.AC_JUL)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.MonthRpt.AC_AUG)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.MonthRpt.AC_SEP)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.MonthRpt.AC_OCT)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.MonthRpt.AC_NOV)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.MonthRpt.AC_DEC)
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayNameFor(model => model.MonthRpt.ROW_ID)
+                                                </th>
+                                                @*<th>Action</th>*@
+
+                                            </tr>
+                                           
+                                                @foreach (var item in Model.MonthRptList)
+                                                //for (int i = 0; i < Model.MonthRptList.Count; i++)
+                                                {
+                                                   
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ITM_TYPE)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ITM_ID)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ITM_DESCRIPTION)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AC_CUM)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AC_JAN)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AC_FEB)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AC_MAR)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AC_APR)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AC_MAY)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AC_JUN)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AC_JUL)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AC_AUG)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AC_SEP)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AC_OCT)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AC_NOV)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AC_DEC)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ROW_ID)
+                                            </td>
+                                            
+                                            <!--<td>-->
+                                            @*<a href="#"><i class="fas fa-edit btn-edit"></i></a>*@
+                                            <!--<input type="submit" value="Save" class="fas fa-save btn-save" />-->
+                                            @*<a href="#"><i class="fas fa-save btn-save"></i></a>*@
+                                            <!--</td>-->
+
+                                        </tr>
+
+                                                }
+
+                                            
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        <!-- /.card-body -->
+                    </div>
+
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

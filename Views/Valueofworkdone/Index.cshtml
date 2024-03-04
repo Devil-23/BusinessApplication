@@ -1,0 +1,261 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@*<h2>Index</h2>*@
+
+<!-- Content Wrapper. Contains page content -->
+@*<div class="content-wrapper">*@
+<!-- Content Header (Page header) -->
+<!--<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1></h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">jsGrid</li>
+                </ol>
+            </div>
+        </div>
+    </div>-->
+<!-- /.container-fluid -->
+<!--</section>-->
+<!-- Main content -->
+<section class="content">
+
+    <div class="card mt-1">
+        <div class="card-header">
+            <h3 class="card-title"><b>Value Of Work Done</b></h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4">
+                    <h6>Status: Accepted by Central Planning</h6>
+
+                </div>
+                <div class="col-8">
+                    <button type="button" class="btn btn-info float-right m-md-2 "> <i class="fa fa-wrench"></i> VOWD Amendment</button>
+
+                    <button type="button" class="btn btn-danger float-right m-md-2"><i class="fa fa-times"></i> Decline</button>
+                    <button type="submit" class="btn btn-primary float-right m-md-2"> <i class="fa fa-check"></i>Accept</button>
+
+
+
+                </div>
+
+            </div>
+
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>JOBNO</th>
+                        <th>Contract Value</th>
+                        <th>VOMD Till Prev. Month</th>
+                        <th>VOMD for the Month</th>
+                        <th>VOMD for the Year</th>
+                        <th>Cumulative VOWD</th>
+                        <th>Balance VOWD</th>
+                        <th>Remarks</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>13030100</td>
+                        <td>85,390,297.31</td>
+                        <td>67,640,296.90</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>67,640,296.90</td>
+                        <td>17,750,000.41</td>
+                        <td></td>
+                        <td><input type="checkbox" /></td>
+                    </tr>
+                    <tr>
+                        <td>13030100</td>
+                        <td>
+                            28,548,607.36
+                        </td>
+                        <td>28,548,607.36</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>67,640,296.90</td>
+                        <td>0.00</td>
+                        <td></td>
+                        <td><input type="checkbox" /></td>
+                    </tr>
+                    <tr>
+                        <td>13030100</td>
+                        <td>
+                            11,700,000.00
+                        </td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>11,700,000.00</td>
+                        <td></td>
+                        <td><input type="checkbox" /></td>
+                    </tr>
+                    <tr>
+                        <td>13030100</td>
+                        <td>370,000.00</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>370,000.00</td>
+                        <td></td>
+                        <td><input type="checkbox" /></td>
+                    </tr>
+                    <tr>
+                        <td>13030100</td>
+                        <td>45,489,004.00</td>
+                        <td>43,744,541.23</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>43,744,541.23</td>
+                        <td>1,744,462.77</td>
+                        <td></td>
+                        <td><input type="checkbox" /></td>
+                    </tr>
+                    <tr>
+                        <td>13030100</td>
+                        <td>5,400,000.00</td>
+                        <td>43,744,541.23</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>43,744,541.23</td>
+                        <td>0.00</td>
+                        <td>Job Closed</td>
+                        <td><input type="checkbox" /></td>
+                    </tr>
+                    <tr>
+                        <td>13030100</td>
+                        <td>4,200,000.00</td>
+                        <td>4,055,727.92</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>4,055,727.92</td>
+                        <td>0.00</td>
+                        <td>Job Closed</td>
+                        <td><input type="checkbox" /></td>
+                    </tr>
+                    <tr>
+                        <td>13030100</td>
+                        <td>18,813,035.00</td>
+                        <td>4,189,574.90</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>4,189,574.90</td>
+                        <td>0.00</td>
+                        <td></td>
+                        <td><input type="checkbox" /></td>
+                    </tr>
+                    <tr>
+                        <td>13030100</td>
+                        <td>17,433,269.39</td>
+                        <td>18,813,035.00</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>18,813,035.00</td>
+                        <td>246,304.39</td>
+                        <td></td>
+                        <td><input type="checkbox" /></td>
+                    </tr>
+                    <tr>
+                        <td>13030100</td>
+                        <td>7,364,101.00</td>
+                        <td>7,334,101.06</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>7,334,101.06</td>
+                        <td>0.00</td>
+                        <td>Job Closed</td>
+                        <td><input type="checkbox" /></td>
+                    </tr>
+                    <tr>
+                        <td>Sub Total</td>
+                        <td>224,708,314.06</td>
+                        <td>191,512,849.37</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>191,512,849.37</td>
+                        <td>31,810,767.57</td>
+                        <td>Job Closed</td>
+                        <td><input type="checkbox" /></td>
+                    </tr>
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Sub Total</th>
+                        <th>224,708,314.06</th>
+                        <th>191,512,849.37</th>
+                        <th>0.00</th>
+                        <th>0.00</th>
+                        <th>191,512,849.37</th>
+                        <th>31,810,767.57</th>
+                        <th></th>
+
+
+
+                        @*<th>Rendering engine</th>
+                            <th>Browser</th>
+                            <th>Platform(s)</th>
+                            <th>Engine version</th>
+                            <th>CSS grade</th>*@
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+
+
+    <!-- /.card -->
+</section>
+<!-- /.content -->
+@*</div>*@
+<!-- /.content-wrapper -->
+@*<script>
+        $(function () {
+            $("#jsGrid1").jsGrid({
+                height: "100%",
+                width: "100%",
+
+                sorting: true,
+                paging: true,
+
+                data: db.clients,
+
+                fields: [
+                    { name: "Name", type: "text", width: 150 },
+                    { name: "Age", type: "number", width: 50 },
+                    { name: "Address", type: "text", width: 200 },
+                    { name: "Country", type: "select", items: db.countries, valueField: "Id", textField: "Name" },
+                    { name: "Married", type: "checkbox", title: "Is Married" }
+                ]
+            });
+        });
+    </script>*@
+
+<script>
+    $(document).ready(function () {
+        $('#example1').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
+</script>
+
+

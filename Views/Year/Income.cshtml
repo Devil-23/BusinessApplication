@@ -1,0 +1,248 @@
+﻿@model BusinessApplication.ViewModels.MultipleVM
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Income</title>
+    @*<style>
+        
+        /*responsive table with cells added by sohel*/
+        .table-rs {
+            overflow-x: auto; /* Enable horizontal scrollbar when table overflows */
+
+            max-width: 100%; /* Ensure the table fits within the container */
+
+            //table-layout: auto;
+        }
+
+        /* Allow input elements to fill their parent cells */
+
+        td input[type="text"] {
+            width: 100%;
+            box-sizing: border-box;
+            border: none; /* Remove input borders */
+
+            background: transparent; /* Make input background transparent */
+
+            table-layout: auto;
+        }
+
+        .dtHorizontalExampleWrapper {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #dtHorizontalExample th, td {
+            white-space: nowrap;
+        }
+
+       
+       
+        /* Custom CSS to make the input responsive */
+        /*.responsive-input {
+
+            width: 100%;*/ /* Take up 100% of its container width */
+        /*min-width: 50px;*/ /* Set a minimum width so it doesn't become too narrow */
+        /*}
+
+        .table-responsive {
+
+            overflow-x: auto !important;
+
+            max-width: 100% !important;
+
+        }*/
+        .table-rs {
+            overflow-x: auto; /* Enable horizontal scrollbar when table overflows */
+
+            max-width: 100%; /* Ensure the table fits within the container */
+        }
+
+
+
+        /* Allow input elements to fill their parent cells */
+
+        td input[type="text"] {
+            width: 100%;
+            box-sizing: border-box;
+            border: none; /* Remove input borders */
+
+            background: transparent; /* Make input background transparent */
+        }
+ 
+    </style>*@
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-header-sap">
+                        @using (Html.BeginForm("Income", "Year", new { year = ViewBag.Year, jobno = ViewBag.JobNo }, FormMethod.Post))
+                        {
+                            <div class="card-header">
+                                <h3 class="card-title">Income</h3>
+
+                                <div class="card-tools">
+
+                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                        <input type="submit" value="Update" class="btn btn-primary" />
+
+
+                                        @*<input type="text" name="table_search" class="form-control float-right" placeholder="Search">*@
+
+                                        @*<div class="input-group-append">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>*@
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- /.card-header -->
+                    <div class="row pt-3" style="margin: 2px;">
+                        @*<div class="col-md-12 col-sm-12 col-12 p-2 table-responsive">*@
+                        <div class=" p-2 table-responsive" style="overflow-x: auto;">
+                            <div class="table-wrapper table-rs">
+                                <table class="table table-hover table-bordered table-striped text-nowrap" id="dtHorizontalExample">
+
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.ID)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.DESCRIPTION)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.JAN)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.FEB)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.MAR)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.APR)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.MAY)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.JUN)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.JUL)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.AUG)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.SEP)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.OCT)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.NOV)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.DEC)
+                                        </th>
+                                        @*<th>Action</th>*@
+
+                                    </tr>
+                                    @if (Model.InList != null)
+                                    {
+                                        @*@foreach (var item in Model.MaterialsIH)*@
+                                        for (int i = 0; i < Model.InList.Count; i++)
+                                        {
+                                            @Html.HiddenFor(modelItem => Model.InList[i].ID)
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => Model.InList[i].ID)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => Model.InList[i].DESCRIPTION)
+                                                </td>
+
+                                                <td class="rs">
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].JAN, new { @class = "form-control rs" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].FEB, new { @class = "form-control rs" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].MAR, new { @class = "form-control" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].APR, new { @class = "form-control" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].MAY, new { @class = "form-control" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].JUN, new { @class = "form-control" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].JUL, new { @class = "form-control" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].AUG, new { @class = "form-control" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].SEP, new { @class = "form-control" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].OCT, new { @class = "form-control" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].NOV, new { @class = "form-control" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].DEC, new { @class = "form-control" })
+                                                </td>
+                                                <!--<td>-->
+                                                @*<a href="#"><i class="fas fa-edit btn-edit"></i></a>*@
+                                                <!--<input type="submit" value="Save" class="fas fa-save btn-save" />-->
+                                                @*<a href="#"><i class="fas fa-save btn-save"></i></a>*@
+                                                <!--</td>-->
+
+                                            </tr>
+
+                                        }
+
+                                    }
+                                </table>
+                            </div>
+                            </div>
+                        </div>
+                            }
+                            <!-- /.card-body -->
+                        </div>
+
+                        <!-- /.card -->
+                    </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+</body>
+
+
+
+
+
+
+
+
+</html>

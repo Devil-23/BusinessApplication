@@ -1,0 +1,164 @@
+﻿@model BusinessApplication.ViewModels.MultipleVM
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Location</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <section class="content">
+        <div class="card card-header-sap">
+            <div class="card-header">
+                <h3 class="card-title">Location</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-left" style="margin: 5px 0px 5px 5px">
+                    <input type="button" id="btnAdd" class="btn btn-primary para" value="Add New" />
+                </div>
+            </div>
+            <div class="row pt-3" style="margin: 2px;">
+                <div class="col-md-12 col-sm-12 col-12 p-2 table-responsive" style="overflow-x:auto">
+                    <table class="table table-hover table-bordered table-striped text-nowrap" id="tblData">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Loc.ID)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Loc.Location)
+                                </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.LVM.Count; i++)
+                            {
+                                @Html.HiddenFor(modelItem => Model.LVM[i].ID)
+                                <tr>
+                                    <td>
+                                        @Html.TextBoxFor(modelItem => Model.LVM[i].ID, new { @class = "form-control" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(modelItem => Model.LVM[i].Location, new { @class = "form-control", @id = "locationName_" + Model.LVM[i].ID })
+                                    </td>
+                                    <td>
+                                        <input type="button" value="Update" class="fas fa-save btn-primary " onclick="EditLocation(@Model.LVM[i].ID)" />
+                                        <input type="button" value="Delete" class="fas fa-save btn-danger " onclick="DeleteLocation(@Model.LVM[i].ID)" />
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        function GetAllLocation() {
+            $.ajax({
+                url: "/Home/GetAllLocation",
+                type: 'GET',
+
+                success: function (data) {
+                    $('#tblData tbody').html(data);
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+        function DeleteLocation(id) {
+            $.ajax({
+                url: "/Home/DeleteLocation",
+                type: 'POST',
+                data: {
+                    Id: id
+                },
+                success: function (data) {
+                    console.log("Deleted");
+                    GetAllLocation();
+                    window.location.reload();
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+        function EditLocation(id) {
+            var name = $("#locationName_" + id).val();
+            $.ajax({
+                url: "/Home/EditLocation",
+                type: 'POST',
+                data: {
+                    Id: id, Name: name
+                },
+                success: function (data) {
+                    console.log("Updated");
+                    GetAllLocation();
+                    window.location.reload();
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+        $('#tblData').on('click', '.btn-cancel', function () {
+            $(this).parent().parent().remove();
+        });
+        var emptyNewRow = "<tr class='trNewRow'>";
+        emptyNewRow += "<td class='tdName' ><input type='text' class='form-control txtName' name='ID' ;' /></td>";
+        emptyNewRow += "<td class='tdName'><input type='text' class='form-control txtName' name='Location';' /></td>";
+        emptyNewRow += "<td class='tdAction'>";
+        emptyNewRow += "<input type='submit' class='btn btn-sm btn-success btn-save' value='Add'>";
+        emptyNewRow += "<button class='btn btn-sm btn-danger btn-cancel'>Cancel</button>";
+        emptyNewRow += "</td>";
+        emptyNewRow += "</tr>";
+        $(document).ready(function () {
+            $("#btnAdd").click(function () {
+                if ($("#tblData tbody").children().children().length === 1) {
+                    $("#tblData tbody").html("");
+
+                }
+                var newRow = $(emptyNewRow);
+                $("#tblData tbody").prepend(newRow);
+            });
+            $('#tblData').on('click', '.btn-save', function () {
+                var row = $(this).closest('tr');
+                var item = {
+                    ID: row.find('input[name="ID"]').val(),
+                    Location: row.find('input[name="Location"]').val(),
+                };
+                var dataToSend = {
+                    LVM: []
+                };
+                dataToSend.LVM.push(item);
+                $.ajax({
+                    url: '/Home/AddLocation',
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(dataToSend),
+                    success: function (data) {
+                        console.log("Added");
+                        GetAllLocation();
+                        window.location.reload();
+                    },
+                    error: function (error) {
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+

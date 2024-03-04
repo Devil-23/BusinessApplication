@@ -1,0 +1,239 @@
+﻿@model BusinessApplication.ViewModels.MultipleVM
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ResourceTools</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+
+        // Function to handle the "Find" field input
+        function handleFindInput() {
+            var findValue = $("#findField").val();
+            console.log("Find value:", findValue);
+            // You can perform additional actions with the findValue if needed
+        }
+
+        function resourcedata() {
+            alert("Hello world");
+
+            var selectedData = [];
+            var tableRows = document.querySelectorAll("#tbl1 tbody tr");
+
+            tableRows.forEach(function (row) {
+                var checkbox = row.querySelector("input[name='chk']");
+                if (checkbox.checked) {
+                    var rowData = {
+                        ID: row.cells[1].innerHTML.trim(),
+                        DESCRIPTION: row.cells[2].innerHTML.trim(),
+                        Unit: row.cells[3].innerHTML.trim(),
+                        Rate: row.cells[4].innerHTML.trim(),
+                    };
+                    selectedData.push(rowData);
+                }
+            });
+
+            console.log(selectedData);
+
+            if (selectedData.length > 0) {
+                $.ajax({
+                    // url: '/Year/GetManpower',
+                    url: '/Tools/ResourceTools',
+                    method: 'POST',
+                    data: JSON.stringify({ InList: selectedData }),
+                    contentType: 'application/json',
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (error) {
+                        console.error(error);
+                    }
+                });
+            } else {
+                alert("No data selected. Please select data before applying.");
+            }
+        }
+
+        $(document).ready(function () {
+            //var selectedRowCount = 0; // 0 for "All" by default
+            var selectedRowCount =5; // 0 for "All" by default
+            var currentPage = 0;
+
+            // Function to update the table based on the selected row count
+            function updateTable() {
+                var table = document.getElementById("tbl1");
+                var rows = table.getElementsByTagName("tr");
+
+                // Hide all rows
+                for (var i = 1; i < rows.length; i++) {
+                    rows[i].style.display = "none";
+                }
+
+                // Calculate the range of rows to display on the current page
+                var start = currentPage * selectedRowCount + 1;
+                var end = Math.min((currentPage + 1) * selectedRowCount + 1, rows.length);
+
+                // Display the rows for the current page
+                for (var i = start; i < end; i++) {
+                    rows[i].style.display = "";
+                }
+
+                // Update the page number and rows count
+                var totalRows = rows.length - 1;
+                var totalPages = Math.ceil(totalRows / selectedRowCount);
+                $("#pageInfo").text("Page " + (currentPage + 1) + " of " + totalPages + " (" + totalRows + " rows)");
+            }
+
+            // Function to update the row count and update the table
+            function updateRowCount() {
+                selectedRowCount = parseInt($("#rowsPerPage").val());
+                currentPage = 0; // Reset to the first page when changing row count
+                updateTable();
+            }
+
+            // Row count dropdown change event
+            $("#rowsPerPage").change(function () {
+                updateRowCount();
+            });
+
+            // Previous page button click
+            $("#prevPage").click(function () {
+                if (currentPage > 0) {
+                    currentPage--;
+                    updateTable();
+                }
+            });
+
+            // Next page button click
+            $("#nextPage").click(function () {
+                var table = document.getElementById("tbl1");
+                var rows = table.getElementsByTagName("tr");
+
+                if ((currentPage + 1) * selectedRowCount + 1 < rows.length) {
+                    currentPage++;
+                    updateTable();
+                }
+            });
+
+            // Initialize the table
+            updateTable();
+        });
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+    @* @using (Html.BeginForm("ResourceTools1", "Tools", FormMethod.Post))*@
+   <div class="card" style="width:900px">
+
+            <div class="row pt-3" style="margin:2px">
+                <div class="col-md-12 col-sm-12 col-12 p-2 ">
+                    <h6>Resource</h6>
+                    @*<div style="display:flex">
+            <p>Find</p> &nbsp;&nbsp;<input type="text" class='form-control' style="width:500px" />
+        </div>*@
+                    <div style="display:flex">
+                        @using (Html.BeginForm("SearchByTitle", "Tools", new {area="", year = ViewBag.Year}, FormMethod.Post))
+                        {
+                            @:Find:@Html.TextBox("Title",null,  new { @style = "width:500px" })
+                            <input type="submit" value="Search" class='btn btn-primary'/>
+                        }
+                        @*<p>Find</p> &nbsp;&nbsp;<input type="text" id="findField" class='form-control' style="width:500px" />*@
+                    </div>
+
+                    <div id="pagination">
+                        @*<label for="rowsPerPageSelect">Rows per Page:</label>*@
+                        <label for="rowsPerPageSelect">Show: </label>
+                        <select id="rowsPerPage" class="select2">
+                            @*<option value="">All</option>*@
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <!-- Add more options as needed -->
+                        </select>
+                        @*<span id="pageInfo">Page 1 of 1</span>*@
+                        @*<button id="prevPage">Previous</button>
+            <button id="nextPage">Next</button>*@
+                    </div>
+                    @using (Html.BeginForm("ResourceTools", "Tools", new {area="", year = ViewBag.Year, jobno = ViewBag.JobNo, resotype = ViewBag.ResoType }, FormMethod.Post))
+                    {
+                        <table id="tbl1" style="margin:3px" class="table table-bordered table-hover table-striped maintable">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:center;width:20px">SELECT</th>
+                                    <th style="width: 15px">ID</th>
+                                    <th style="text-align: center; width: 30px">DESCRIPTION</th>
+                                    <th style="text-align: center; width: 30px">UNIT</th>
+                                    <th style="text-align: center; width: 30px">RATE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{int i = 0;}
+                                @*@foreach (var item in Model.GlobalList.ToList())*@
+                                @for (var j = 0; j < Model.InList.Count; j++)
+                                {
+                                    <tr>
+                                        <td>
+                                            @*<input type='checkbox' class='form-control ' name="chk" style="width:18px;margin-left:65px" />*@
+                                            @*<asp:CheckBox ID="AApBlue" runat="server" Checked='<%#GetBoolean(Eval("blueFlag").ToString()) %>' />Blue*@
+                                            @*@Html.CheckBoxFor(m => m.chkPart[i])*@
+                                            @*@Html.CheckBox("selectedItems", false, new { data_id = item.RESO_ID })*@
+                                            @{i = i + 1;}
+                                            @Html.CheckBoxFor(modelItem => Model.InList[j].IsSelected)
+                                            @Html.HiddenFor(modelItem => Model.InList[j].ID)
+                                        </td>
+                                        <td>
+                                            @Html.HiddenFor(modelItem => Model.InList[j].ID, new { @id = "reso_id" })
+                                            @Html.DisplayFor(modelItem => Model.InList[j].ID, new { @id = "reso_id" })
+                                        </td>
+                                        <td>
+                                            @Html.HiddenFor(modelItem => Model.InList[j].DESCRIPTION)
+                                            @Html.DisplayFor(modelItem => Model.InList[j].DESCRIPTION)
+                                        </td>
+                                        <td>
+                                            @Html.HiddenFor(modelItem => Model.InList[j].Unit)
+                                            @Html.DisplayFor(modelItem => Model.InList[j].Unit)
+                                        </td>
+                                        <td>
+                                            @Html.HiddenFor(modelItem => Model.InList[j].Rate)
+                                            @Html.DisplayFor(modelItem => Model.InList[j].Rate)
+                                        </td>
+                                    </tr>
+                                                }
+                            </tbody>
+                        </table>
+                        <div style="display:flex">
+                            <div style="position:relative;left:30px"><input type="checkbox" />&nbsp;Toggle Selected Items</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="submit" value="Add" class="btn btn-primary" />
+                            <!--<div style="position:relative;left:550px"><input type="button"  value="Apply" class="btn btn-primary " onclick="resourcedata()">-->@*<button onclick="resourcedata();">Apply</button>*@<!--</div>-->
+                        </div>
+                                                }
+                    </div>
+
+            </div>
+           
+
+        </div>
+
+    <div class="card-footer">
+        <span id="pageInfo">Page 1 of 1</span>
+
+        <div class="float-right">
+            <button id="prevPage">Previous</button>
+            <button id="nextPage">Next</button>
+        </div>
+    </div>
+   
+
+</body>
+</html>

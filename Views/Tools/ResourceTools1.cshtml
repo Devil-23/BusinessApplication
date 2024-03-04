@@ -1,0 +1,127 @@
+﻿@model BusinessApplication.ViewModels.MultipleVM
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ResourceTools</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+
+        //$(document).ready(function () {
+        //    $("#btnSend").click(function () {
+        //        ApplyBtn();
+        //    })
+        //})
+
+
+        function ApplyBtn() {
+            alert("Hello world");
+
+            var selectedData = [];
+            var tableRows = document.querySelectorAll("#tbl1 tbody tr");
+
+            tableRows.forEach(function (row) {
+                var checkbox = row.querySelector("input[name='chk']");
+                if (checkbox.checked) {
+                    var rowData = {
+                        ID: row.cells[1].innerHTML.trim(),
+                        DESCRIPTION: row.cells[2].innerHTML.trim(),
+                        Unit: row.cells[3].innerHTML.trim(),
+                        Rate: row.cells[4].innerHTML.trim(),
+                    };
+                    selectedData.push(rowData);
+                }
+            });
+
+            console.log(selectedData);
+
+            if (selectedData.length > 0) {
+                $.ajax({
+                    url: '/Year/GetManpower',
+
+                    method: 'POST',
+                    data: JSON.stringify({ InList: selectedData }),
+                    contentType: 'application/json',
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (error) {
+                        console.error(error);
+                    }
+                });
+            } else {
+                alert("No data selected. Please select data before applying.");
+            }
+        }
+
+
+
+    </script>
+</head>
+<body>
+    @*@using (Html.BeginForm("ResourceTools", "Tools", FormMethod.Post))*@
+    @using (Html.BeginForm("GetManpower", "Year", FormMethod.Post))
+    {<div class="card" style="width:700px">
+
+            <div class="row pt-3" style="margin:2px">
+                <div class="col-md-12 col-sm-12 col-12 p-2 ">
+                    <h6>Resource</h6>
+                    <div style="display:flex">
+                        <p>Find</p> &nbsp;&nbsp;<input type="text" class='form-control' style="width:500px" />
+                    </div>
+                    <table id="tbl1" style="margin:3px" class="table table-bordered table-hover table-striped maintable">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center;width:20px">SELECT</th>
+                                <th style="width: 15px">ID</th>
+                                <th style="text-align: center; width: 30px">DESCRIPTION</th>
+                                <th style="text-align: center; width: 30px">UNIT</th>
+                                <th style="text-align: center; width: 30px">RATE</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var item in Model.GlobalList)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type='checkbox' class='form-control ' name="chk" style="width:18px;margin-left:65px" />
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.RESO_ID, new { @id = "reso_id" })
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.RESO_TITLE)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.RESO_UNIT)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.RESO_RATE)
+                                    </td>
+
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div style="display:flex">
+                <div style="position:relative;left:30px"><input type="checkbox" />&nbsp;Toggle Selected Items</div>
+                <div style="position:relative;left:500px"><input type="submit" value="Apply" class="btn btn-primary " @*id="btnSend"*@ onclick="ApplyBtn()">@*<button onclick="resourcedata();">Apply</button>*@</div>
+                @*<input type="button" value="Apply1" class="btn btn-primary " onclick="resourcedata()">*@
+
+                has context menu
+            </div>
+        </div>}
+    <!--<div style="position:relative;left:500px"><input type="button" value="Apply" class="btn btn-primary " id="btnSend"--> @*onclick="resourcedata()"*@<!-->-->@*<button onclick="resourcedata();">Apply</button>*@<!--</div>-->
+
+</body>
+</html>

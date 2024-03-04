@@ -1,0 +1,424 @@
+﻿@model BusinessApplication.ViewModels.MultipleVM
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Busines Application Application</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Business Application | Dashboard</title>
+    <link href="~/Content/Chosen/chosen.min.css" rel="stylesheet" />
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Frontend/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="~/Frontend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="~/Frontend/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="~/Frontend/plugins/jqvmap/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Frontend/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="~/Frontend/dist/css/adminlte.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/Frontend/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="~/Frontend/plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="~/Frontend/plugins/summernote/summernote-bs4.min.css">
+    <link href="~/Frontend/dist/css/customstyle.css" rel="stylesheet" />
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="~/Frontend/dist/img/B-type.png" alt="Logo" height="60" width="60">
+        </div>
+        <nav class="main-header navbar navbar-expand navbar-white navbar-sap navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">File</a>
+                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                        <li><a href="@Url.Action("Index","File",new { area = "" })" class="pull-right dropdown-item">New Job</a></li>
+                        <li><a href="@Url.Action("GetAllClient","Home",new { area = "" })" class="pull-right dropdown-item">Client</a></li>
+                        <li><a href="@Url.Action("GetAllLocation","Home",new { area=""})" class="pull-right dropdown-item">Location</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Tools</a>
+                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                        <li><a href="@Url.Action("Index","UserAuthorization",new { area=""})" class="pull-right dropdown-item">Authorization</a></li>
+                        <li><a href="@Url.Action("Create", "UserAuthorization",new { area = "" })" class="pull-right dropdown-item">New User</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Reports</a>
+                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow" style="overflow-y: scroll; max-height: 300px;">
+                        <li><a href="@Url.Action("Report","Home")" class="pull-right dropdown-item report-dropdown-item" data-report-type="Quarterwise">Quarterwise Report </a></li>
+                        <li><a href="@Url.Action("Report","Home")" class="pull-right dropdown-item report-dropdown-item" data-report-type="Monthwise">Monthwise Report </a></li>
+                        <li><a href="@Url.Action("Report","Home")" class="pull-right dropdown-item report-dropdown-item" data-report-type="Divisionwise">Divisionwise Summary </a></li>
+                        <li><a href="@Url.Action("Report","Home")" class="pull-right dropdown-item report-dropdown-item" data-report-type="Jobwise">Jobwise Report </a></li>
+                        <hr />
+                        <li><a href="@Url.Action("Report","Home", new { reportType = "IH" })" class="pull-right dropdown-item " data-report-type="IH">Material - In House</a></li>
+                        <li><a href="@Url.Action("Report","Home", new { reportType = "BO" })" class="pull-right dropdown-item " data-report-type="BO">Material - Brought House</a></li>
+                        <li><a href="@Url.Action("Report","Home", new { reportType = "PG" })" class="pull-right dropdown-item " data-report-type="PG">Plant - Galfar </a></li>
+                        <li><a href="@Url.Action("Report","Home", new { reportType = "PH" })" class="pull-right dropdown-item " data-report-type="PH">Plant - Hire </a></li>
+                        <li><a href="@Url.Action("Report","Home", new { reportType = "MP" })" class="pull-right dropdown-item " data-report-type="MP">Manpower Summary </a></li>
+                        <li><a href="@Url.Action("Report","Home", new { reportType = "SB" })" class="pull-right dropdown-item " data-report-type="SB">Sub contract </a></li>
+                        <li><a href="@Url.Action("Report","Home", new { reportType = "GE" })" class="pull-right dropdown-item report-dropdown-item" data-report-type="GE">General Expenditure</a></li>
+                        <hr />
+                        <li><a href="@Url.Action("Report","Home", new { reportType = "TO" })" class="pull-right dropdown-item" data-report-type="TO">Turnover Statement </a></li>
+                        <li><a href="@Url.Action("Report","Home", new { reportType = "PF" })" class="pull-right dropdown-item" data-report-type="PF">Profit / Loss Statement </a></li>
+                        <li><a href="@Url.Action("Report","Home", new { reportType = "WK" })" class="pull-right dropdown-item" data-report-type="WK">Work Load Summary </a></li>
+                        <li><a href="@Url.Action("Report","Home", new { reportType = "EG" })" class="pull-right dropdown-item" data-report-type="EG">Expenditure at glance </a></li>
+                        <hr />
+                        <li><a href="@Url.Action("Report","Home", new { reportType = "MS" })" class="pull-right dropdown-item">Monthwise Summary </a></li>
+                        <li><a href="@Url.Action("Report","Home", new { reportType = "DS" })" class="pull-right dropdown-item" data-report-type="DS">Divisionwise Summary </a></li>
+                        <li><a href="@Url.Action("Report","Home", new { reportType = "JSM" })" class="pull-right dropdown-item" data-report-type="JS">Jobwise Summary for the Month </a></li>
+                        <li><a href="@Url.Action("Report","Home", new { reportType = "JSY" })" class="pull-right dropdown-item" data-report-type="JSC">Jobwise Summary for the Year </a></li>
+                        <li><a href="@Url.Action("Report","Home", new { reportType = "DC" })" class="pull-right dropdown-item" data-report-type="BPA">Divisionwise cumulative </a></li>
+                        <li><a href="@Url.Action("Report","Home", new { reportType = "SCP" })" class="pull-right dropdown-item" data-report-type="SBP">Subcontractor provision</a></li>
+                        <li><a href="@Url.Action("Report","Home", new { reportType = "J2D" })" class="pull-right dropdown-item" data-report-type="J2D">Job to Date</a></li>
+                        <hr />
+                        <li><a href="@Url.Action("Report","Home", new { reportType = "DEM" })" class="pull-right dropdown-item">Detailed Expenditure Monthwise</a></li>
+                        <li><a href="@Url.Action("Report","Home", new { reportType = "DEQ" })" class="pull-right dropdown-item">Detailed Expenditure Qurterwise</a></li>
+                        <hr />
+                        <li><a href="@Url.Action("Report","Home", new { reportType = "BPRA" })" class="pull-right dropdown-item">BussinessPlan/Revision/Actual</a></li>
+                        <li><a href="@Url.Action("Report","Home", new { reportType = "VOWD" })" class="pull-right dropdown-item">Value of Work Done</a></li>
+                    </ul>
+            </ul>
+            <ul class="navbar nav ml-auto">
+                <li class="nav-item dropdown user-menu">
+                    <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">@Session["UserId"]</a>
+                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                        <li><a href="@Url.Action("ChangePassword","Login",new { area = "" })" class="pull-right dropdown-item">Change Password</a></li>
+                        <li><a href="@Url.Action("LogOut","Login",new { area = "" })" class="pull-right dropdown-item">LogOut</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <aside class="main-sidebar sidebar-dark-primary elevation-4 sidebar-sap nav-lin-sap">
+            <!-- Brand Logo -->
+            <a href="@Url.Action("Index","Home",new { area = "" })" class="brand-link">
+                <img src="~/Frontend/dist/img/B-logo.png" alt="Logo" class="brand-image img-circle sidebar-sap elevation-3" style="opacity: .8; background-color: #6c757d">
+                <span class="brand-text font-weight-light" style="color: #6c757d">Business Application </span>
+            </a>
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- SidebarSearch Form -->
+                <div class="form-inline">
+                    @*<div class="input-group" data-widget="sidebar-search">*@
+                    <div class="input-group">
+                        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-sidebar">
+                                <i class="fas fa-search fa-fw"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                        with font-awesome or any other icon font library -->
+                        <li class="nav-item menu-open">
+                        </li>
+                        @if (Model != null && Model.DictListVM != null)
+                        {
+                            foreach (var temp in Model.DictListVM.Where(x => x != null && x.BP_YEAR != null && x.BP_YEAR >= 0).GroupBy(Obj => new { Obj.BP_YEAR }).Distinct().ToList())
+                            {
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>
+                                @temp.FirstOrDefault().BP_YEAR
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    &nbsp;&nbsp;
+                                    <i class="nav-icon fas fa-copy"></i>
+                                    <p>Bussiness Plan</p>
+                                    <i class="right fas fa-angle-left"></i>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    @foreach (var temp1 in Model.DictListVM.Where(x => x.BP_YEAR == temp.FirstOrDefault()?.BP_YEAR).ToList())
+                                    {
+                                        <li class="nav-item">
+                                            <div class="nav-link">
+                                                <i class="nav-icon fas fa-copy"></i>
+                                                <p style="display: inline;color:black; margin: 0;">@temp1.BP_YEAR - @temp1.JOB_NO&nbsp;</p>
+                                                <a href="javascript:void(0);" class="fileLink" data-year="@temp1.BP_YEAR" data-jobno="@temp1.JOB_NO">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <i class="right fas fa-angle-left"></i>
+                                            </div>
+                                            <ul class="nav nav-treeview">
+                                                <li class="nav-item">
+                                                    <a href="@Url.Action("Income", "BP", new { area="BussinessPlan",@year = temp1.BP_YEAR, @jobno = temp1.JOB_NO })" class="nav-link">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <i class="fas fa-copy nav-icon"></i>
+                                                        <p>Income</p>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="@Url.Action("MaterialInHouse", "BP", new {area="BussinessPlan", @year = temp1.BP_YEAR, @jobno = temp1.JOB_NO})" class="nav-link">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <i class="fas fa-copy nav-icon"></i>
+                                                        <p>Material(In House)</p>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="@Url.Action("MaterialBoughtOut","BP", new {area="BussinessPlan", @year=temp1.BP_YEAR,@jobno=temp1.JOB_NO})" class="nav-link">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <i class="fas fa-copy nav-icon"></i>
+                                                        <p>Material(Bought Out)</p>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="@Url.Action("Manpower","BP", new { area="BussinessPlan",@year=temp1.BP_YEAR,@jobno=temp1.JOB_NO})" class="nav-link">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <i class="fas fa-copy nav-icon"></i>
+                                                        <p>ManPower</p>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="@Url.Action("PlantGalfar","BP", new {area="BussinessPlan", @year=temp1.BP_YEAR,@jobno=temp1.JOB_NO})" class="nav-link">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <i class="fas fa-copy nav-icon"></i>
+                                                        <p>Plant Galfar</p>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="@Url.Action("PlantHire","BP", new {area="BussinessPlan", @year=temp1.BP_YEAR,@jobno=temp1.JOB_NO})" class="nav-link">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <i class="fas fa-copy nav-icon"></i>
+                                                        <p>Plant Hire</p>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="@Url.Action("Subcontract","BP", new {area="BussinessPlan", @year=temp1.BP_YEAR,@jobno=temp1.JOB_NO})" class="nav-link">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <i class="fas fa-copy nav-icon"></i>
+                                                        <p>Sub Contract</p>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="@Url.Action("GeneralExpenditure","BP", new {area="BussinessPlan", @year = temp1.BP_YEAR, @jobno = temp1.JOB_NO})" class="nav-link">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <i class="fas fa-copy nav-icon"></i>
+                                                        <p>General Expenditure</p>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="@Url.Action("Income","BP")" class="nav-link">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <i class="fas fa-copy nav-icon"></i>
+                                                        <p>Previous Year</p>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="@Url.Action("Income","BP")" class="nav-link">
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <i class="fas fa-copy nav-icon"></i>
+                                                        <p>Next Year</p>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    &nbsp;&nbsp;
+                                    <i class="nav-icon fas fa-copy"></i>
+                                    <p>Value of WorkDone</p>
+                                    <i class="right fas fa-angle-left"></i>
+                                </a>
+
+                                <ul class="nav nav-treeview">
+                                    @foreach (var jobNo in Model.DictListVM
+                                        .Where(x => x.BP_YEAR == temp.FirstOrDefault()?.BP_YEAR)
+                                        .Select(temp1 => temp1.JOB_NO.Substring(0, 2))
+                                        .Distinct())
+                                    {
+                                        var temp1 = Model.DictListVM
+                                            .FirstOrDefault(x => x.BP_YEAR == temp.FirstOrDefault()?.BP_YEAR && x.JOB_NO.StartsWith(jobNo));
+
+                                        if (temp1 != null)
+                                        {
+                                            <li class="nav-item">
+                                                <div class="nav-link">
+                                                    <i class="nav-icon fas fa-copy"></i>
+                                                    <a href="@Url.Action("Index", "VOWD", new { area = "ValueOfWorkDone", @year = temp1.BP_YEAR, @job = jobNo })" style="display: inline-block; margin-left: 5px;" data-year="@temp1.BP_YEAR" data-jobno="@jobNo">
+                                                        <p style="display: inline;color:black; margin: 0;">@temp1.BP_YEAR - @jobNo&nbsp;</p>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    &nbsp;&nbsp;
+                                    <i class="nav-icon fas fa-copy"></i>
+                                    <p>Actuals</p>
+                                    <i class="right fas fa-angle-left"></i>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    @foreach (var temp1 in Model.DictListVM.Where(x => x.BP_YEAR == temp.FirstOrDefault()?.BP_YEAR).ToList())
+                                    {
+                                        <li class="nav-item">
+
+
+                                            <a href="@Url.Action("Index", "Actual", new { area="Actuals",@year = temp1.BP_YEAR, @jobno = temp1.JOB_NO })" class="nav-link">
+                                                <p style="display: inline;color:black; margin: 0;">@temp1.BP_YEAR - @temp1.JOB_NO&nbsp;</p>
+                                            </a>
+
+
+
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                            }
+                        }
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
+    </div>
+
+
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="~/Frontend/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="~/Frontend/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>$.widget.bridge('uibutton', $.ui.button)</script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Frontend/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- ChartJS -->
+    <script src="~/Frontend/plugins/chart.js/Chart.min.js"></script>
+    <!-- Sparkline -->
+    <script src="~/Frontend/plugins/sparklines/sparkline.js"></script>
+    <!-- JQVMap -->
+    <script src="~/Frontend/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="~/Frontend/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="~/Frontend/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="~/Frontend/plugins/moment/moment.min.js"></script>
+    <script src="~/Frontend/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="~/Frontend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="~/Frontend/plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="~/Frontend/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Frontend/dist/js/adminlte.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/Frontend/dist/js/demo.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="~/Frontend/dist/js/pages/dashboard.js"></script>
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+               $(".report-dropdown-item").click(function (e) {
+            e.preventDefault();
+            var reportType = $(this).data("report-type");
+            redirectToReportSelection(reportType);
+        });
+             function redirectToReportSelection(reportType) {
+            window.location.href = '@Url.Action("Report", "Home")?reportType=' + reportType;
+        }
+        $('.fileLink').on('click', function (e) {
+            e.stopPropagation();
+            var year = $(this).data('year');
+            var jobNo = $(this).data('jobno');
+            window.location.href = '/File/Edit?year=' + year + '&jobno=' + jobNo;
+        });
+
+        //////sidebar search for Year and JobNo
+        var debounceTimer;
+
+        // Event delegation for input events on the document body
+        document.body.addEventListener("input", function (event) {
+            if (event.target.classList.contains("form-control-sidebar")) {
+                var searchTerm = event.target.value;
+
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(function () {
+                    filterList(searchTerm);
+                }, 300); // Adjust the debounce time as needed
+            }
+        });
+
+        // Function to filter the list based on search terms
+        function filterList(searchTerm) {
+            // Convert search term to lowercase for case-insensitive search
+            searchTerm = searchTerm.toLowerCase();
+
+            // Show all items initially
+            var navItems = document.querySelectorAll(".nav-item");
+            navItems.forEach(function (item) {
+                item.style.display = "block";
+            });
+
+            // Hide only the items that don't match the search term and are not descendants of ".main-header"
+            var filteredItems = document.querySelectorAll(".nav-item:not(.main-header .nav-item)");
+            filteredItems.forEach(function (item) {
+                var itemText = item.textContent.toLowerCase();
+                var isMatch = itemText.includes(searchTerm);
+                item.style.display = isMatch ? "block" : "none";
+
+
+                // If the item is a Year, toggle its Job numbers visibility
+                if (itemText.includes("bussiness plan") && itemText.includes("year")) {
+                    var jobNumbers = item.querySelectorAll(".nav-treeview .nav-item");
+                    jobNumbers.forEach(function (jobNumber) {
+                        jobNumber.style.display = isMatch ? "block" : "none";
+                    });
+                }
+
+            });
+        }
+
+
+    });
+</script>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="077e0ca51c3b4d19a216d29170f03da8" Name="Diagram1">
+        <EntityTypeShape EntityType="BusinessPlanModel.COMMENT" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.dtproperty" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.MAIL" Width="1.5" PointX="9.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_BP_ADJYEAR" Width="1.5" PointX="8" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_BP_CLIENT" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_BP_DICTIONARY" Width="1.5" PointX="5.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_BP_DIVISION" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_BP_LOCATION" Width="1.5" PointX="2.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_BP_PERMISSION" Width="1.5" PointX="4.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_BP_POSTED" Width="1.5" PointX="11.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_BP_RESOURCE" Width="1.5" PointX="8" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_BP_RESOURCE_" Width="1.5" PointX="10.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_BP_REVISION" Width="1.5" PointX="9.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_BP_USERMASTER" Width="1.5" PointX="11.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_MN_ACTUALS" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_MN_APPROVAL" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_MN_BPLAN" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_MN_COMMENTS" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_MN_HEADS" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_MN_LOG" Width="1.5" PointX="6.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_MN_PERIOD" Width="1.5" PointX="13.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_MN_POSTED" Width="1.5" PointX="13.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_MN_PROJECTION" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_MN_PROVISION" Width="1.5" PointX="13.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_MN_USERMAP" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_MN_WORKDONE" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_PJ_POSTED" Width="1.5" PointX="14.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_RESOURCE_GLOBAL" Width="1.5" PointX="2.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_RV_ACTIVE" Width="1.5" PointX="15.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_RV_BPLAN" Width="1.5" PointX="8.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_RV_DICTIONARY" Width="1.5" PointX="15.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_RV_MASTER" Width="1.5" PointX="10.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_RV_RESOURCE" Width="1.5" PointX="15.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_RV_RESOURCE_" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.VOWDH" Width="1.5" PointX="4.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.bkp_tbl_bp_permission" Width="1.5" PointX="17.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_MN_LOGAPPROVAL" Width="1.5" PointX="17.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_MN_PROJECTION_BACKUP" Width="1.5" PointX="17.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessPlanModel.TBL_RESOURCE_GLOBAL_BIN" Width="1.5" PointX="17.75" PointY="16.75" IsExpanded="true" />
+        <AssociationConnector Association="BusinessPlanModel.FK_ADJYEAR_2_DICTIONARY" ManuallyRouted="false" />
+        <AssociationConnector Association="BusinessPlanModel.FK_DICTIONARY_2_RESOURCE" ManuallyRouted="false" />
+        <AssociationConnector Association="BusinessPlanModel.FK_RESOURCE_2_RESOURCE_" ManuallyRouted="false" />
+        <AssociationConnector Association="BusinessPlanModel.FK_MN_PROJECTION_2_ACTUALS" ManuallyRouted="false" />
+        <AssociationConnector Association="BusinessPlanModel.FK_MN_BPLAN_2_HEADS" ManuallyRouted="false" />
+        <AssociationConnector Association="BusinessPlanModel.FK_MN_PROJECTION_2_HEADS" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BusinessPlanModel.vw_Users" Width="1.5" PointX="11.375" PointY="18.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

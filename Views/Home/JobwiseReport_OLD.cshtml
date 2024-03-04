@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "JobwiseReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>JobwiseReport</h2>
+
+@using (Html.BeginForm("ExportCustomers", "TestReport", new { reportType = ViewBag.ReportType }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+
+
+    <!-- general form elements -->
+    <div class="card card-primary mt-2">
+        <div class="card-header">
+            <h3 class="card-title">Report</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group" style="display:flex">
+                            <label class="mt-md-2">Reporting Year</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            @*<select class="form-control select2" style="width: 100%;">
+                                    <option selected="selected">Year</option>
+
+                                </select>*@
+                            @Html.DropDownList("BPYEAR", ViewBag.BPYEAR as SelectList, "Select Year", new { id = "BPYEAR" })
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                    @*<div class="col-md-7" style="display:flex">
+                        <div class="col-md-2 mt-md-2">
+                            <div class="form-check ">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Galfar</label>
+                            </div>
+                        </div>
+                        <div class="col-md-2 mt-md-2">
+                            <div class="form-check ">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">JV</label>
+                            </div>
+                        </div>
+                        <div class="col-md-2 mt-md-2">
+                            <div class="form-check ">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Anticipated</label>
+                            </div>
+                        </div>
+                    </div>*@
+                </div>
+                <div class="row">
+                    <div class="col-md-5"></div>
+                    <div class="col-md-5">
+                        <div class="form-group" style="display:flex">
+                            <label>Job(s)</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            @*<select class="form-control select2" style="width: 100%;">
+                                    <option selected="selected">ALL</option>
+                                </select>*@
+                            @Html.DropDownList("JOBNO", ViewBag.JOBNO as SelectList, "Select JOBNO", new { id = "JOBNO" })
+                        </div>
+                    </div>
+                </div>
+                @*<div class="row">
+                    <div class="col-md-5"></div>
+                    <div class="col-md-5">
+                        <div class="form-group" style="display:flex">
+                            <label>Reporting Month</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <select class="form-control select2" style="width: 100%;">
+                                <option selected="selected">Month</option>
+                                <option>January</option>
+                                <option>February</option>
+                                <option>March</option>
+                                <option>April</option>
+                                <option>May</option>
+                                <option>June</option>
+                                <option>July</option>
+                                <option>August</option>
+                                <option>September</option>
+                                <option>Octomber</option>
+                                <option>November</option>
+                                <option>December</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>*@
+                <hr />
+                <div class="row">
+                    <div class="col-md-7"></div>
+                    <div class="col-md-2 mt-md-5">
+                        <button type="button" class="btn btn-primary">Show </button>
+                    </div>
+                    <div class="col-md-2 mt-md-5">
+                        <button type="submit" class="btn btn-primary">Download </button>
+                    </div>
+
+                </div>
+             
+
+            </div>
+            <!-- /.card-body -->
+
+        </form>
+    </div> <!-- /.card -->
+
+
+    
+}

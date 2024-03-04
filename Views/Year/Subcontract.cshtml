@@ -1,0 +1,259 @@
+﻿@model BusinessApplication.ViewModels.MultipleVM
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SubContract</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <section class="content">
+        <div class="card card-header-sap">
+            @*@using (Html.BeginForm("MaterialBoughtOut", "Year", new { year = ViewBag.Year, jobno = ViewBag.JobNo }, FormMethod.Post))
+                {*@
+            <div class="card-header">
+                <h3 class="card-title">SubContract</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-left" style="margin: 5px 0px 5px 5px">
+                    <input type="button" id="btnAdd" class="btn btn-primary para" value="Add New" />
+                    @*<input type="submit" value="Save" class="fas fa-save btn-save btn-save" />*@
+                </div>
+            </div>
+            <div class="row pt-3" style="margin: 2px;">
+                <div class=" p-2 table-responsive" style="overflow-x:auto">
+                    @*<table id="tblData" class="table table-bordered dtHorizontalExample table-hover table-striped " style="width:100%">*@
+                    <div class="table-wrapper table-rs">
+                        <table id="tblData" class="table table-bordered dtHorizontalExample table-hover text-nowrap table-striped ">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Description</th>
+                                    <th>Jan</th>
+                                    <th>Feb</th>
+                                    <th>Mar</th>
+                                    <th>Apr</th>
+                                    <th>May</th>
+                                    <th>Jun</th>
+                                    <th>Jul</th>
+                                    <th>Aug</th>
+                                    <th>Sep</th>
+                                    <th>Oct</th>
+                                    <th>Nov</th>
+                                    <th>Dec</th>
+                                    <th class="tdaction" style="width: 111px">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.InList != null)
+                                {
+                                    for (int i = 0; i < Model.InList.Count; i++)
+                                    {
+                    @Html.HiddenFor(modelItem => Model.InList[i].ID)
+
+                                        <tr>
+                                            <td>
+                                                @Html.TextBoxFor(modelItem => Model.InList[i].ID, new { @class = "form-control", @id = "ID_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                            </td>
+                                            <td>
+                                                @Html.TextBoxFor(modelItem => Model.InList[i].DESCRIPTION, new { @class = "form-control", @id = "desc_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                            </td>
+                                            <td>
+                                                @Html.TextBoxFor(modelItem => Model.InList[i].JAN, new { @class = "form-control", @id = "jan_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                            </td>
+                                            <td>
+                                                @Html.TextBoxFor(modelItem => Model.InList[i].FEB, new { @class = "form-control", @id = "feb_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                            </td>
+                                            <td>
+                                                @Html.TextBoxFor(modelItem => Model.InList[i].MAR, new { @class = "form-control", @id = "mar_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                            </td>
+                                            <td>
+                                                @Html.TextBoxFor(modelItem => Model.InList[i].APR, new { @class = "form-control", @id = "apr_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                            </td>
+                                            <td>
+                                                @Html.TextBoxFor(modelItem => Model.InList[i].MAY, new { @class = "form-control", @id = "may_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                            </td>
+                                            <td>
+                                                @Html.TextBoxFor(modelItem => Model.InList[i].JUN, new { @class = "form-control", @id = "jun_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                            </td>
+                                            <td>
+                                                @Html.TextBoxFor(modelItem => Model.InList[i].JUL, new { @class = "form-control", @id = "jul_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                            </td>
+                                            <td>
+                                                @Html.TextBoxFor(modelItem => Model.InList[i].AUG, new { @class = "form-control", @id = "aug_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                            </td>
+                                            <td>
+                                                @Html.TextBoxFor(modelItem => Model.InList[i].SEP, new { @class = "form-control", @id = "sept_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                            </td>
+                                            <td>
+                                                @Html.TextBoxFor(modelItem => Model.InList[i].OCT, new { @class = "form-control", @id = "oct_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                            </td>
+                                            <td>
+                                                @Html.TextBoxFor(modelItem => Model.InList[i].NOV, new { @class = "form-control", @id = "nov_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                            </td>
+                                            <td>
+                                                @Html.TextBoxFor(modelItem => Model.InList[i].DEC, new { @class = "form-control", @id = "dec_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                            </td>
+                                            <td>
+                                                <input type='submit' class='btn btn-sm btn-success btn-edit' value='Update' data-id="@Model.InList[i].ID" />
+                                            </td>
+                                        </tr>}
+                                                    }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>@*}*@
+        </div>
+    </section>
+
+    <script>
+            var emptyNewRow = "<tr class='trNewRow'>";
+        emptyNewRow += "<td class='tdName' ><input type='text' class='form-control txtName' name='ID' style='width: auto; max-width: auto;' /></td>";
+        emptyNewRow += "<td class='tdName'><input type='text' class='form-control txtName' name='DESCRIPTION' style='width: auto; max-width: auto;' /></td>";
+        emptyNewRow += "<td class='tdName'><input type='text' class='form-control txtName' name='JAN' style='width: auto; max-width: auto;' /></td>";
+        emptyNewRow += "<td class='tdName'><input type='text' class='form-control txtName' name='FEB' style='width: auto; max-width: auto;' /></td>";
+        emptyNewRow += "<td class='tdName'><input type='text' class='form-control txtName' name='MAR' style='width: auto; max-width: auto;' /></td>";
+        emptyNewRow += "<td class='tdName'><input type='text' class='form-control txtName' name='APR' style='width: auto; max-width: auto;' /></td>";
+        emptyNewRow += "<td class='tdName'><input type='text' class='form-control txtName' name='MAY' style='width: auto; max-width: auto;' /></td>";
+        emptyNewRow += "<td class='tdName'><input type='text' class='form-control txtName' name='JUN' style='width: auto; max-width: auto;' /></td>";
+        emptyNewRow += "<td class='tdName'><input type='text' class='form-control txtName' name='JUL' style='width: auto; max-width: auto;' /></td>";
+        emptyNewRow += "<td class='tdName'><input type='text' class='form-control txtName' name='AUG' style='width: auto; max-width: auto;' /></td>";
+        emptyNewRow += "<td class='tdName'><input type='text' class='form-control txtName' name='SEP' style='width: auto; max-width: auto;' /></td>";
+        emptyNewRow += "<td class='tdName'><input type='text' class='form-control txtName' name='OCT' style='width: auto; max-width: auto;' /></td>";
+        emptyNewRow += "<td class='tdName'><input type='text' class='form-control txtName' name='NOV' style='width: auto; max-width: auto;' /></td>";
+        emptyNewRow += "<td class='tdName'><input type='text' class='form-control txtName' name='DEC' style='width: auto; max-width: auto;' /></td>";
+            emptyNewRow += "<td class='tdAction'>";
+            emptyNewRow += "<input type='submit' class='btn btn-sm btn-success btn-save' value='Save'>";
+            emptyNewRow += "<button class='btn btn-sm btn-danger btn-cancel'>Cancel</button>";
+            emptyNewRow += "</td>";
+            emptyNewRow += "</tr>";
+
+
+          
+
+        $(document).ready(function () {
+
+                 //Add new row into the table
+                           $("#btnAdd").click(function () {
+                    if ($("#tblData tbody").children().children().length === 1) {
+                        $("#tblData tbody").html("");
+                    }
+
+                               var newRow = $(emptyNewRow);
+                               $("#tblData tbody").append(newRow);
+
+                });
+
+            //Save data into database
+                $('#tblData').on('click', '.btn-save', function () {
+                    var row = $(this).closest('tr');
+                    var item = {
+                        ID: row.find('input[name="ID"]').val(),
+                        DESCRIPTION: row.find('input[name="DESCRIPTION"]').val(),
+                         JAN: row.find('input[name="JAN"]').val(),
+                        FEB: row.find('input[name="FEB"]').val(),
+                        MAR: row.find('input[name="MAR"]').val(),
+                        APR: row.find('input[name="APR"]').val(),
+                        MAY: row.find('input[name="MAY"]').val(),
+                        JUN: row.find('input[name="JUN"]').val(),
+                        JUL: row.find('input[name="JUL"]').val(),
+                        AUG: row.find('input[name="AUG"]').val(),
+                        SEP: row.find('input[name="SEP"]').val(),
+                        OCT: row.find('input[name="OCT"]').val(),
+                        NOV: row.find('input[name="NOV"]').val(),
+                        DEC: row.find('input[name="DEC"]').val(),
+                    };
+                    var dataToSend = {
+    year: '@ViewBag.Year',
+    jobno: '@ViewBag.JobNo',
+    rec: null,
+    InList: []
+};
+                    dataToSend.InList.push(item);
+                    $.ajax({
+                        url: '/Year/Subcontract',
+                        type: 'POST',
+                        contentType: 'application/json; charset=utf-8',
+                        data: JSON.stringify( dataToSend),
+                        success: function (data) {
+                            console.log("Added");
+                        },
+                        error: function (error) {
+                            console.error(error);
+                        }
+                    });
+                });
+
+            //Update data into database
+            $('#tblData').on('click', '.btn-edit', function () {
+                var id = $(this).data('id');
+                var inputId = $("#ID_" + id).val();
+                var desc = $("#desc_" + id).val();
+                var jan = $("#jan_" + id).val();
+                var feb = $("#feb_" + id).val();
+                var mar = $("#mar_" + id).val();
+                var apr = $("#apr_" + id).val();
+                var may = $("#may_" + id).val();
+                var jun = $("#jun_" + id).val();
+                var jul = $("#jul_" + id).val();
+                var aug = $("#aug_" + id).val();
+                var sept = $("#sept_" + id).val();
+                var oct = $("#oct_" + id).val();
+                var nov = $("#nov_" + id).val();
+                var dec = $("#dec_" + id).val();
+        var dataToSend = {
+            year: '@ViewBag.Year',
+            jobno: '@ViewBag.JobNo',
+            rec: null,
+            InList: [{
+                ID: inputId,
+                DESCRIPTION: desc,
+                JAN: jan,
+                FEB: feb,
+                MAR: mar,
+                APR:apr,
+                MAY: may,
+                JUN:jun,
+                JUL: jul,
+                AUG:aug,
+                SEP: sept,
+                OCT:oct,
+                NOV: nov,
+                DEC: dec,
+            }]
+        };
+                   // dataToSend.InList.push(item);
+                    $.ajax({
+                        url: '/Year/Subcontract',
+                        type: 'POST',
+                        contentType: 'application/json; charset=utf-8',
+                        data: JSON.stringify( dataToSend),
+                        success: function (data) {
+                            console.log("UPdated");
+                        },
+                        error: function (error) {
+                            console.error(error);
+                        }
+                    });
+                });
+
+            //cancel row from the table
+                $('#tblData').on('click', '.btn-cancel', function () {
+                    $(this).parent().parent().remove();
+                });
+
+           
+        });
+
+      
+
+    </script>
+</body>
+</html>

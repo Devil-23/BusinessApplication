@@ -1,0 +1,166 @@
+﻿@model BusinessApplication.ViewModels.MultipleVM
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Client</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <section class="content">
+        <div class="card card-header-sap">         
+            <div class="card-header">
+                <h3 class="card-title">Client</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-left" style="margin: 5px 0px 5px 5px">
+                    <input type="button" id="btnAdd" class="btn btn-primary para" value="Add New" />
+                </div>
+            </div>
+            <div class="row pt-3" style="margin: 2px;">
+                <div class="col-md-12 col-sm-12 col-12 p-2 table-responsive" style="overflow-x:auto">
+                    <table class="table table-hover table-bordered table-striped text-nowrap" id="tblData">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Client.CLIENT)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Client.ClientName)
+                                </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.CVM.Count; i++)
+                            {
+                                @Html.HiddenFor(modelItem => Model.CVM[i].ID)
+                                <tr>
+                                    <td>
+                                        @Html.TextBoxFor(modelItem => Model.CVM[i].ID, new { @class = "form-control" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(modelItem => Model.CVM[i].ClientName, new { @class = "form-control", @id = "clientName_" + Model.CVM[i].ID })
+                                    </td>                                  
+                                    <td>
+                                        <input type="button" value="Update" class="fas fa-save btn-primary" onclick="EditClient(@Model.CVM[i].ID)" />
+                                        <input type="button" value="Delete" class="fas fa-save btn-danger " onclick="DeleteClient(@Model.CVM[i].ID)" />
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        function GetAllClient() {
+            $.ajax({
+                url: "/Home/GetAllClient",
+                type: 'GET',
+                
+                success: function (data) {
+                    $('#tblData tbody').html(data);
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+        function DeleteClient(id) {
+            $.ajax({
+                url: "/Home/DeleteClient",
+                type: 'POST',
+                data: {
+                    Id: id
+                },
+                success: function (data) {
+                    console.log("Deleted");
+                    GetAllClient();
+                    window.location.reload();
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+      
+        function EditClient(clientId) {
+            var name = $("#clientName_" + clientId).val();
+
+            $.ajax({
+                url: "/Home/EditClient",
+                type: 'POST',
+                data: { Id: clientId, Name: name },
+                success: function (data) {
+                    console.log("Updated");
+                    GetAllClient();
+                  window.location.reload();
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+
+
+        $('#tblData').on('click', '.btn-cancel', function () {
+            $(this).parent().parent().remove();
+        });
+        var emptyNewRow = "<tr class='trNewRow'>";
+        emptyNewRow += "<td class='tdName' ><input type='text' class='form-control txtName' name='ID' ;' /></td>";
+        emptyNewRow += "<td class='tdName'><input type='text' class='form-control txtName' name='ClientName';' /></td>";
+        emptyNewRow += "<td class='tdAction'>";
+        emptyNewRow += "<input type='submit' class='btn btn-sm btn-success btn-save' value='Add'>";
+        emptyNewRow += "<button class='btn btn-sm btn-danger btn-cancel'>Cancel</button>";
+        emptyNewRow += "</td>";
+        emptyNewRow += "</tr>";
+        $(document).ready(function () {
+            $("#btnAdd").click(function () {
+                if ($("#tblData tbody").children().children().length === 1) {
+                    $("#tblData tbody").html("");
+
+                }
+                var newRow = $(emptyNewRow);
+                $("#tblData tbody").prepend(newRow);
+            });
+            $('#tblData').on('click', '.btn-save', function () {
+                var row = $(this).closest('tr');
+                var item = {
+                    ID: row.find('input[name="ID"]').val(),
+                    ClientName: row.find('input[name="ClientName"]').val(),
+                };
+                var dataToSend = {
+                    CVM: []
+                };
+                dataToSend.CVM.push(item);
+                $.ajax({
+                    url: '/Home/AddClient',
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(dataToSend),
+                    success: function (data) {
+                        console.log("Added");
+                        GetAllClient();
+                        window.location.reload();
+                    },
+                    error: function (error) {
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+

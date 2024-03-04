@@ -1,0 +1,489 @@
+﻿@model BusinessApplication.ViewModels.MultipleVM
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Actuals</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        /*.month {
+            display: none;
+        }*/
+        .tds{
+            padding: 10px !important;
+        }
+        .trt{
+             background: white !important;
+        }
+    </style>
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-header-sap">
+                        <div class="card-header">
+                            <h3 class="card-title">Actuals</h3>
+                        </div>
+                        @using (Html.BeginForm("Index", "Actual", new { area = "Actuals", year = ViewBag.Year, jobno = ViewBag.JobNo }, FormMethod.Post))
+                        {
+                            if (Model.AInList != null)
+                            {
+                    <div class="row" id="AInListData">
+                        <div class="col-md-12 text-left" style="margin: 5px 0px 5px 5px">
+                            @*<input type="button" id="btnAdd" class="btn btn-primary para" value="Add Month" />*@
+                            <input type="submit" class="btn btn-sm btn-success " value="Save" />
+                        </div>
+                    </div>
+                                        <div class="row pt-3" style="margin: 2px;">
+                                            <div class="p-2 table-responsive" style="overflow-x: auto;">
+                                                <div class="table-wrapper table-rs">
+                                                    <table class="table table-hover table-bordered table-striped text-nowrap" id="tblData">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>
+                                                                    @Html.DisplayNameFor(model => model.MaterialIH.ID)
+                                                                </th>
+                                                                <th>
+                                                                    TYPE
+                                                                </th>
+                                                                <th>
+                                                                    @Html.DisplayNameFor(model => model.MaterialIH.DESCRIPTION)
+                                                                </th>
+                                                                <th class="month month-value">JAN</th>
+                                                                <th class="month month-value">FEB</th>
+                                                                <th class="month month-value">MAR</th>
+                                                                <th class="month month-value">APR</th>
+                                                                <th class="month month-value">MAY</th>
+                                                                <th class="month month-value">JUN</th>
+                                                                <th class="month month-value">JUL</th>
+                                                                <th class="month month-value">AUG</th>
+                                                                <th class="month month-value">SEP</th>
+                                                                <th class="month month-value">OCT</th>
+                                                                <th class="month month-value">NOV</th>
+                                                                <th class="month month-value">DEC</th>
+                                                            </tr>
+                                                        </thead>
+                                                        @for (int j = 0; j < Model.AInList.Count; j++)
+                                                        {
+                                    <tbody>
+                                        <tr>
+                                            <td clas="tds">
+                                                @Html.HiddenFor(modelItem => Model.AInList[j].ID, new { @class = "hidden-index", data_id = Model.AInList[j].ID, data_type = Model.AInList[j].Type })
+                                                @Html.DisplayFor(modelItem => Model.AInList[j].ID, new { @id = "ID_" + Model.AInList[j].ID })
+                                            </td>
+                                            <td class="tds">
+                                                @Html.HiddenFor(modelItem => Model.AInList[j].Type, new { @class = "hidden-index", data_id = Model.AInList[j].ID, data_type = Model.AInList[j].Type })
+                                                @Html.DisplayFor(modelItem => Model.AInList[j].Type, new { @id = "type_" + Model.AInList[j].ID })
+                                            </td>
+                                            <td class="tds">
+                                                @Html.DisplayFor(modelItem => Model.AInList[j].DESCRIPTION, new { @id = "desc_" + Model.AInList[j].ID })
+                                            </td>
+                                            <td class="month tds">
+                                                @Html.TextBoxFor(modelItem => Model.AInList[j].JAN, new { @class = "form-control rs" })
+                                            </td>
+                                            <td class="month tds">
+                                                @Html.TextBoxFor(modelItem => Model.AInList[j].FEB, new { @class = "form-control rs" })
+                                            </td>
+                                            <td class="month tds">
+                                                @Html.TextBoxFor(modelItem => Model.AInList[j].MAR, new { @class = "form-control rs" })
+                                            </td>
+                                            <td class="month tds">
+                                                @Html.TextBoxFor(modelItem => Model.AInList[j].APR, new { @class = "form-control rs" })
+                                            </td>
+                                            <td class="month tds">
+                                                @Html.TextBoxFor(modelItem => Model.AInList[j].MAY, new { @class = "form-control rs" })
+                                            </td>
+                                            <td class="month tds">
+                                                @Html.TextBoxFor(modelItem => Model.AInList[j].JUN, new { @class = "form-control rs" })
+                                            </td>
+                                            <td class="month tds">
+                                                @Html.TextBoxFor(modelItem => Model.AInList[j].JUL, new { @class = "form-control rs" })
+                                            </td>
+                                            <td class="month tds">
+                                                @Html.TextBoxFor(modelItem => Model.AInList[j].AUG, new { @class = "form-control rs" })
+                                            </td>
+                                            <td class="month tds">
+                                                @Html.TextBoxFor(modelItem => Model.AInList[j].SEP, new { @class = "form-control rs" })
+                                            </td>
+                                            <td class="month tds">
+                                                @Html.TextBoxFor(modelItem => Model.AInList[j].OCT, new { @class = "form-control rs" })
+                                            </td>
+                                            <td class="month tds">
+                                                @Html.TextBoxFor(modelItem => Model.AInList[j].NOV, new { @class = "form-control rs" })
+                                            </td>
+                                            <td class="month tds">
+                                                @Html.TextBoxFor(modelItem => Model.AInList[j].DEC, new { @class = "form-control rs" })
+                                            </td>
+                                        </tr>
+                                    </tbody>}
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        }
+                                }
+
+                        @if (Model.InList != null)
+                        {
+                            <div class="row pt-3" style="margin: 2px;">
+                                <div class="p-2 table-responsive" style="overflow-x: auto;">
+                                    <div class="table-wrapper table-rs">
+                                        <table class="table table-hover table-bordered table-striped text-nowrap" id="tblData">
+                                            <thead>
+                                                <tr>
+                                                    <th>@Html.DisplayNameFor(model => model.MaterialIH.ID)</th>
+                                                    <th>TYPE</th>
+                                                    <th>@Html.DisplayNameFor(model => model.MaterialIH.DESCRIPTION)</th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.MaterialIH.JAN)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.MaterialIH.FEB)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.MaterialIH.MAR)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.MaterialIH.APR)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.MaterialIH.MAY)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.MaterialIH.JUN)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.MaterialIH.JUL)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.MaterialIH.AUG)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.MaterialIH.SEP)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.MaterialIH.OCT)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.MaterialIH.NOV)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.MaterialIH.DEC)
+                                                    </th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+
+                                            @{
+                                                string currentType = null; // Variable to track current itm_type
+                                            }
+
+                                            @for (int i = 0; i < Model.InList.Count; i++)
+                                            {
+                                                var row = Model.InList[i];
+
+                                                if (currentType != row.Type)
+                                                {
+                                                    // Display total row for the previous group
+                                                    if (currentType == "IN")
+                                                    {
+                                                        <tr class="trt">
+                                                            <td colspan="2" style="text-align:center">TI</td>
+                                                            <td>Total Income</td>
+                                                            @for (int month = 1; month <= 12; month++)
+                                                            {
+                                                                <td>@Model.InList.Where(item => item.Type == currentType).Sum(item => item.GetMonthValue(month))</td>
+                                                            }
+                                                        </tr>
+                                                    }
+
+                                                     if (currentType == "GE" )
+                                                    {
+                                                        <tr class="trt">
+                                                            <td colspan="2" style="text-align:center">TG</td>
+                                                            <td>Total General Exp.</td>
+                                                            @for (int month = 1; month <= 12; month++)
+                                                            {
+                                                                <td>@Model.InList.Where(item => item.Type == currentType).Sum(item => item.GetMonthValue(month))</td>
+                                                            }
+                                                        </tr>
+                                                    }
+
+                                                      if (currentType == "MH" )
+                                                    {
+                                                        <tr class="trt">
+                                                            <td colspan="2" style="text-align:center">TP</td>
+                                                            <td>Total Plant</td>
+                                                            @for (int month = 1; month <= 12; month++)
+                                                            {
+                                                                <td>@Model.InList.Where(item => item.Type == currentType).Sum(item => item.GetMonthValue(month))</td>
+                                                            }
+                                                        </tr>
+                                                    }
+                                                      if (currentType == "MP" )
+                                                    {
+                                                        <tr class="trt">
+                                                            <td colspan="2" style="text-align:center">TL</td>
+                                                            <td>Total Labour</td>
+                                                            @for (int month = 1; month <= 12; month++)
+                                                            {
+                                                                <td>@Model.InList.Where(item => item.Type == currentType).Sum(item => item.GetMonthValue(month))</td>
+                                                            }
+                                                        </tr>
+                                                    }
+
+                                                      if (currentType == "SB" )
+                                                    {
+                                                        <tr class="trt">
+                                                            <td colspan="2" style="text-align:center">VA</td>
+                                                            <td>Value Addition</td>
+                                                            @for (int month = 1; month <= 12; month++)
+                                                            {
+                                                                <td>@Model.InList.Where(item => item.Type == currentType).Sum(item => item.GetMonthValue(month))</td>
+                                                            }
+                                                        </tr>
+                                                    }
+                                                    // Update currentType to the current itm_type
+                                                    currentType = row.Type;
+                                                }
+
+                                                <tbody>
+                                                    <tr>
+                                                        @Html.HiddenFor(modelItem =>  Model.InList[i].ID, new { @class = "hidden-index", data_id =  Model.InList[i].ID, data_type =  Model.InList[i].Type })
+                                                        <td>@Html.DisplayFor(modelItem =>  Model.InList[i].ID, new { @id = "ID_" +  Model.InList[i].ID })</td>
+                                                        <td>@Html.DisplayFor(modelItem =>  Model.InList[i].Type, new { @id = "type_" +  Model.InList[i].ID })</td>
+                                                        <td>@Html.DisplayFor(modelItem =>  Model.InList[i].DESCRIPTION)</td>
+                                                        <td>
+                                                            @Html.TextBoxFor(modelItem => Model.InList[i].JAN, new { @class = "form-control", @id = "jan_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                        </td>
+                                                        <td>
+                                                            @Html.TextBoxFor(modelItem => Model.InList[i].FEB, new { @class = "form-control", @id = "feb_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                        </td>
+                                                        <td>
+                                                            @Html.TextBoxFor(modelItem => Model.InList[i].MAR, new { @class = "form-control", @id = "mar_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                        </td>
+                                                        <td>
+                                                            @Html.TextBoxFor(modelItem => Model.InList[i].APR, new { @class = "form-control", @id = "apr_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                        </td>
+                                                        <td>
+                                                            @Html.TextBoxFor(modelItem => Model.InList[i].MAY, new { @class = "form-control", @id = "may_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                        </td>
+                                                        <td>
+                                                            @Html.TextBoxFor(modelItem => Model.InList[i].JUN, new { @class = "form-control", @id = "jun_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                        </td>
+                                                        <td>
+                                                            @Html.TextBoxFor(modelItem => Model.InList[i].JUL, new { @class = "form-control", @id = "jul_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                        </td>
+                                                        <td>
+                                                            @Html.TextBoxFor(modelItem => Model.InList[i].AUG, new { @class = "form-control", @id = "aug_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                        </td>
+                                                        <td>
+                                                            @Html.TextBoxFor(modelItem => Model.InList[i].SEP, new { @class = "form-control", @id = "sept_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                        </td>
+                                                        <td>
+                                                            @Html.TextBoxFor(modelItem => Model.InList[i].OCT, new { @class = "form-control", @id = "oct_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                        </td>
+                                                        <td>
+                                                            @Html.TextBoxFor(modelItem => Model.InList[i].NOV, new { @class = "form-control", @id = "nov_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                        </td>
+                                                        <td>
+                                                            @Html.TextBoxFor(modelItem => Model.InList[i].DEC, new { @class = "form-control", @id = "dec_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                        </td>
+                                                        <td><input type="submit" class="btn btn-sm btn-primary btn-edit" value="Update" data-id="@Model.InList[i].ID" /></td>
+                                                    </tr>
+                                                </tbody>
+                                            }
+
+                                            <!-- Display total row for the last group -->
+                                            @if (currentType == "SE")
+                                            {
+                                                <tr class="trt">
+                                                    <td colspan="2" style="text-align:center">TC</td>
+                                                    <td>Total Cost</td>
+                                                    @for (int month = 1; month <= 12; month++)
+                                                    {
+                                                        <td>@Model.InList.Where(item => item.Type == currentType).Sum(item => item.GetMonthValue(month))</td>
+                                                    }
+                                                </tr>
+                                            }
+                                                <tr>
+                        <td colspan="2" style="text-align:center; ">CD</td>
+                        <td> Contribution</td>
+                        @for (int month = 1; month <= 12; month++)
+                        {
+                            <td>@Model.InList.Sum(item => item.GetMonthValue(month))</td>
+                        }
+                    </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+
+<script>
+
+
+    $(document).ready(function () {
+        //$("#btnAdd").click(function () {
+        //    $(".month").toggle();
+
+        //});
+
+        @*$('#AInListData').on('click', '.btn-save', function () {
+        var outerRow = $(this).closest('tr');
+        var innerRow = outerRow.next('tr');
+        var id = innerRow.find('.hidden-index').data('id');
+        var type = innerRow.find('.hidden-index').data('type');
+            var JAN = innerRow.find('input[name="JAN"]').val();
+            const AInList = [];
+            var item = {
+                ID: id,
+                Type:type,
+                JAN: JAN,
+
+            };
+        var dataToSend = {
+            year: '@ViewBag.Year',
+            jobno: '@ViewBag.JobNo',
+            AInList: [],
+            InList: null
+        };
+
+            dataToSend.AInList.push(item);
+            console.log(AInList);
+        $.ajax({
+            url: '@Url.Action("Index", "Actual", new { area = "Actuals" })',
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(dataToSend),
+            success: function (data) {
+                console.log("Added");
+            },
+            error: function (error) {
+                console.error(error);
+            }
+        });
+    });*@
+
+        ////Old code
+        //Update data into database
+        $('#tblData').on('click', '.btn-edit', function () {
+            var row = $(this).closest('tr');
+        var id = $(this).data('id');
+        var type = row.find('.hidden-index').data('type');
+        var jan = $("#jan_" + id).val();
+        var feb = $("#feb_" + id).val();
+        var mar = $("#mar_" + id).val();
+        var apr = $("#apr_" + id).val();
+        var may = $("#may_" + id).val();
+        var jun = $("#jun_" + id).val();
+        var jul = $("#jul_" + id).val();
+        var aug = $("#aug_" + id).val();
+        var sept = $("#sept_" + id).val();
+        var oct = $("#oct_" + id).val();
+        var nov = $("#nov_" + id).val();
+        var dec = $("#dec_" + id).val();
+var dataToSend = {
+    year: '@ViewBag.Year',
+    jobno: '@ViewBag.JobNo',
+    rec: null,
+    InList: [{
+        ID: id,
+        Type: type,
+        JAN: jan,
+        FEB: feb,
+        MAR: mar,
+        APR:apr,
+        MAY: may,
+        JUN:jun,
+        JUL: jul,
+        AUG:aug,
+        SEP: sept,
+        OCT:oct,
+        NOV: nov,
+        DEC: dec,
+    }]
+};
+            $.ajax({
+                url: '@Url.Action("Index", "Actual", new { area = "Actuals" })',
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify( dataToSend),
+                success: function (data) {
+                    console.log("UPdated");
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        });
+    });
+
+  // Update data into database
+@*$('#tblData').on('click', '.btn-edit', function () {
+    var row = $(this).closest('tr');
+    var id = $(this).data('id');
+    var type = row.find('.hidden-index').data('type');
+    var jan = $("#jan_" + id).val();
+    var feb = $("#feb_" + id).val();
+    var mar = $("#mar_" + id).val();
+    var apr = $("#apr_" + id).val();
+    var may = $("#may_" + id).val();
+    var jun = $("#jun_" + id).val();
+    var jul = $("#jul_" + id).val();
+    var aug = $("#aug_" + id).val();
+    var sept = $("#sept_" + id).val();
+    var oct = $("#oct_" + id).val();
+    var nov = $("#nov_" + id).val();
+    var dec = $("#dec_" + id).val();
+
+    // Construct the data object to be sent in the AJAX request
+    var dataToSend = {
+        JOB_NO: '@ViewBag.JobNo',
+        ITM_YEAR: '@ViewBag.Year',
+        JAN: jan,
+        FEB: feb,
+        MAR: mar,
+        APR: apr,
+        MAY: may,
+        JUN: jun,
+        JUL: jul,
+        AUG: aug,
+        SEP: sept,
+        OCT: oct,
+        NOV: nov,
+        DEC: dec
+    };
+
+    $.ajax({
+        url: '@Url.Action("Index", "Actual", new { area = "Actuals" })',
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(dataToSend),
+        success: function (data) {
+            console.log("Updated");
+        },
+        error: function (error) {
+            console.error(error);
+        }
+    });
+});*@
+
+
+  
+
+</script>
+

@@ -1,0 +1,323 @@
+﻿@model BusinessApplication.ViewModels.MultipleVM
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>
+        Index
+
+    </title>
+    <script src="~/Scripts/jquery-3.4.1.slim.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+</head>
+<body>
+
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-header-sap">
+                        <div class="card-header">
+                            <h3 class="card-title">Business Plan</h3>
+                        </div>
+
+
+
+                        @*New*@
+                        <form id="jobDetailsForm" method="GET" action="@Url.Action("Edit", "File")">
+                            <input type="hidden" id="jobNoInput" name="jobno" />
+                            <input type="hidden" id="yearInput" name="year" />
+                        </form>
+
+                        <div class="card-body">
+                            <div class="row pt-3" style="margin:5px">
+                                @using (Html.BeginForm("Index", "File", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <div class="form-horizontal">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Bussiness Plan Year<span class="text-danger">*</span></label>
+                                            <div class="col-md-4">
+                                                @Html.EditorFor(model => model.DictVM.BP_YEAR, new { htmlAttributes = new { @class = "form-control", @id = "BP_YEAR" } })
+                                                @Html.ValidationMessageFor(model => model.DictVM.BP_YEAR, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Job No<span class="text-danger">*</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</label>
+                                            <div class="col-md-3">
+                                                @Html.EditorFor(model => model.DictVM.JOB_NO, new
+                                                {
+                                                    htmlAttributes = new
+                                                    {
+                                                        @class = "form-control",
+                                                        @id = "JobNo"@*, @onkeydown = "GetDiv()"*@}
+})
+                                                @Html.ValidationMessageFor(model => model.DictVM.JOB_NO, "", new { @class = "text-danger", @id = "error-message" })
+                                            </div>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                                            <label class="col-sm-2 col-form-label">Division &nbsp; &nbsp; &nbsp;</label>
+                                            <div class="col-md-3">
+                                                @Html.EditorFor(model => model.DictVM.DIVISION, new { htmlAttributes = new { @class = "form-control", @id = "Div" } })
+                                                @Html.ValidationMessageFor(model => model.DictVM.DIVISION, "", new { @class = "text-danger" })
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label"> Contract Value<span class="text-danger">*</span>&nbsp; </label>
+                                            <div class="col-md-3">
+                                                @Html.EditorFor(model => model.DictVM.JOB_VOWD, new { htmlAttributes = new { @class = "form-control", @id = "job_vowd" } })
+                                                @Html.ValidationMessageFor(model => model.DictVM.JOB_VOWD, "", new { @class = "text-danger" })
+                                            </div> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                                            <label class="col-sm-2 col-form-label">Start Date<span class="text-danger">*</span>&nbsp; &nbsp;</label>
+                                            <div class="col-md-3">
+                                                @Html.TextBoxFor(model => model.DictVM.SDATE, new { @class = "form-control DatePicker", id = "startDatePicker" })
+                                                @*@Html.EditorFor(model => model.DictVM.SDATE, new { htmlAttributes = new { @class = "form-control", id = "startDatePicker" } })*@
+                                                @Html.ValidationMessageFor(model => model.DictVM.SDATE, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label"> Job Leader <span class="text-danger">*</span>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </label>
+                                            <div class="col-md-3">
+                                                @Html.EditorFor(model => model.DictVM.BP_MANAGER, new { htmlAttributes = new { @class = "form-control", @id = "BP_Manager" } })
+                                                @Html.ValidationMessageFor(model => model.DictVM.BP_MANAGER, "", new { @class = "text-danger" })
+                                            </div> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                                            <label class="col-sm-2 col-form-label"> Finish Date<span class="text-danger">*</span></label>
+                                            <div class="col-md-3">
+                                                @Html.TextBoxFor(model => model.DictVM.FDATE, new { @class = "form-control DatePicker", id = "finishDatePicker" })
+                                                @*@Html.EditorFor(model => model.DictVM.FDATE, new { htmlAttributes = new { @class = "form-control", Type = "date" } })*@
+                                                @Html.ValidationMessageFor(model => model.DictVM.FDATE, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Client<span class="text-danger">*</span>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;</label>
+                                            <div class="col-md-9">
+                                                @*@Html.DropDownList("CLIENT")*@
+                                                @*@Html.DropDownList("CLIENT", null, "Select", htmlAttributes: new { @class = "form-control" ,@id="CLIENT"})*@
+                                                @Html.DropDownListFor(model => model.DictVM.CLIENT, (IEnumerable<SelectListItem>)ViewBag.CLIENT, "Select", new { @class = "form-control", @id = "client" })
+                                                @Html.ValidationMessageFor(model => model.DictVM.CLIENT, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div><br />
+
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Location<span class="text-danger">*</span>&nbsp; &nbsp;</label>
+                                            <div class="col-md-9">
+                                                @Html.DropDownListFor(model => model.DictVM.LOCATION, (IEnumerable<SelectListItem>)ViewBag.LId, "Select", new { @class = "form-control", @id = "location" })
+                                                @Html.ValidationMessageFor(model => model.DictVM.LOCATION, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div><br />
+
+
+                                        <div class="row">
+                                            <label class="col-sm-2 col-form-label">Job Title<span class="text-danger">*</span>&nbsp; &nbsp;</label>
+                                            <div class="col-md-9">
+                                                @Html.EditorFor(model => model.DictVM.JOB_TITLE, new { htmlAttributes = new { @class = "form-control", Type = "textarea", @id = "job_title" } })
+                                                @Html.ValidationMessageFor(model => model.DictVM.JOB_TITLE, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div><br />
+
+
+
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                                                <input type="checkbox" />Offshore Project
+                                            </div>
+                                            <div class="col-md-2 ">
+                                                <label class=" col-form-label float-md-right">Staff<span class="text-danger">*</span></label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label class=" col-form-label">Worker<span class="text-danger">*</span></label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">OT % Split<span class="text-danger">*</span></label>
+                                            <div class="col-md-2">
+                                                @Html.EditorFor(model => model.DictVM.OT_PERCENT, new { htmlAttributes = new { @class = "form-control", @id = "ot_percent" } })
+                                                @Html.ValidationMessageFor(model => model.DictVM.OT_PERCENT, "", new { @class = "text-danger" })
+                                            </div><span class="col-md-2" style="color:blue">enter values without % symbol</span>
+                                            <label class="col-sm-2 col-form-label">Per day Food Cost</label>
+                                            <div class="col-md-2">
+
+                                                @Html.EditorFor(model => model.DictVM.FOOD_STAFF, new { htmlAttributes = new { @class = "form-control", @id = "food_staff" } })
+                                                @Html.ValidationMessageFor(model => model.DictVM.FOOD_STAFF, "", new { @class = "text-danger" })
+
+                                            </div>
+                                            <div class="col-md-2">
+                                                @Html.EditorFor(model => model.DictVM.FOOD_WORKER, new { htmlAttributes = new { @class = "form-control", @id = "food_worker" } })
+                                                @Html.ValidationMessageFor(model => model.DictVM.FOOD_WORKER, "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Fuel % <span class="text-danger">*</span> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;</label>
+                                            <div class="col-md-2">
+                                                @Html.EditorFor(model => model.DictVM.FUEL_PERCENT, new { htmlAttributes = new { @class = "form-control", @id = "fuel_percent" } })
+                                                @Html.ValidationMessageFor(model => model.DictVM.FUEL_PERCENT, "", new { @class = "text-danger" })
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-2">
+
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input type="checkbox" />Joint Venture
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input type="checkbox" />Anticipated
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    @*</div>
+                    </div>*@
+                                    <!-- /.card-body -->
+
+                                    <div class="card-footer-sap">
+                                        @*<button type="submit" class="btn btn-primary">Submit</button>*@
+
+                                        <div class="col-md-4">
+                                            <input type="submit" value="Save" class="btn btn-primary" />
+                                            &nbsp;&nbsp;
+                                            <input type="submit" value="Exit" class="btn btn-danger" />
+                                        </div>
+
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script>
+    $(document).ready(function () {
+        GetEmployeeInfo();
+
+         $("#JobNo, #BP_YEAR").on('change', function () {
+        var jobNoValue = $("#JobNo").val();
+        var selectedYear = $("#BP_YEAR").val();
+             if (jobNoValue.trim() !== "" && selectedYear.trim() !== "") {
+                 $("#jobNoInput").val(jobNoValue);
+                 $("#yearInput").val(selectedYear);
+                 $("#jobDetailsForm").submit();
+                 console.log("form submitted");
+             }
+        
+    });
+
+        $("#JobNo").on('change', function () {
+            var jobNoValue = $(this).val();
+            console.log("JobNo Value:", jobNoValue);
+
+            if (jobNoValue.trim().length >= 2 && jobNoValue !== null && jobNoValue !== "") {
+                Getjob("#JobNo");
+            } else {
+                console.log("Conditions not met.");
+            }
+        });
+    });
+
+
+    $(function () {
+        $(".DatePicker").datepicker({
+            dateFormat: "dd/mm/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "c-100:c+10"
+        });
+    });
+
+    function setDefaultDate() {
+        var startDatePicker = document.getElementById("startDatePicker");
+        var finishDatePicker = document.getElementById("finishDatePicker");
+        var currentYear = new Date().getFullYear();
+        var startDate = "01/01/" + currentYear;
+        var finishDate = "31/12/" + currentYear;
+        startDatePicker.value = startDate;
+        finishDatePicker.value = finishDate;
+    }
+    window.onload = function() {
+        setDefaultDate();
+    };
+
+
+
+    function Getjob(BP_YEAR) {
+
+          var jobNoValue = $("#JobNo").val().slice(0, 2);
+    var url = '@Url.Action("GetDivision", "File")' + '?JOBNO=' + jobNoValue;
+       // var url = 'https://localhost:44326/File/GetDivision?JOBNO=' + $("#JobNo").val().slice(0, 2);
+        console.log("Request URL:", url);
+
+        $.ajax({
+            url: url,
+            method: 'get',
+            contentType: 'json',
+            success: function (resp) {
+                $("#Div").val(resp.Div);
+                if (resp.Div == null)
+                {
+                    $('#error-message').text('Invalid Job Number');
+                }
+
+            }
+
+        });
+    }
+
+
+     function GetEmployeeInfo() {
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GetDivision")',
+                data: { "JOBNO": $("#jobNO").val() },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.EName != null) {
+                        if (data.EName == "") {
+                            $("#info").val('');
+                            return;
+                        }
+                        document.getElementById('id2').style.display = "block";
+                        $("#EName").val(data.EName);
+                    }
+                    else {
+                        $("#EName").val('');
+                    }
+                },
+                error: function (emp) {
+                    //alert('error');
+                }
+            });
+    }
+
+
+
+
+</script>
+
+

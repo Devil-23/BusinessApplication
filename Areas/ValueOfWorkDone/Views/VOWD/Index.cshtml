@@ -1,0 +1,636 @@
+﻿@model BusinessApplication.ViewModels.MultipleVM
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vaue Of Work Done</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style type="text/css">
+        .table, .ChildGrid {
+            width: 150%;
+            overflow-x: auto;
+            height: auto;
+        }
+
+        /*.ChildGrid > tr > td {
+                max-width: auto;
+            }*/
+
+        .tdi {
+            width: 8.6%;
+        }
+
+        .tdc {
+            width: 6.5%;
+        }
+
+        .Grid {
+            border-collapse: collapse;
+        }
+
+            .Grid img {
+                cursor: pointer;
+            }
+
+        .ChildGrid {
+            width: 100%;
+            table-layout: fixed;
+        }
+
+            .ChildGrid th {
+                background-color: #6C6C6C;
+                color: #fff;
+                font-weight: bold;
+            }
+
+        .hiddenRow {
+            display: none;
+        }
+
+        .editable {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <section class="content">
+        <div class="card card-header-sap">
+            <div class="card-header">
+                <h3 class="card-title">Value of Work Done</h3>
+            </div>
+            @using (Html.BeginForm("Index", "VOWD", new { area = "ValueOfWorkDone", year = ViewBag.Year, jobno = ViewBag.JobNo }, FormMethod.Post))
+            {
+                if (Model.VInList != null)
+                {
+                    <div class="row" id="AInListData">
+                        <div class="col-md-12 text-left" style="margin: 5px 0px 5px 5px">
+                            <input type="submit" class="btn btn-sm btn-success " value="Save" />
+                        </div>
+                    </div>
+                    <div class="row pt-3" style="margin: 2px;">
+                        <div class="p-2 table-responsive" style="overflow-x: auto;">
+                            <div class="table-wrapper table-rs">
+                                <table class="table table-hover table-bordered table-striped text-nowrap" id="tblData">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.MaterialIH.JobNo)
+                                            </th>
+                                            <th>
+                                                JOB_C
+                                            </th>
+                                            <th class="month">JAN</th>
+                                            <th class="month">FEB</th>
+                                            <th class="month">MAR</th>
+                                            <th class="month">APR</th>
+                                            <th class="month">MAY</th>
+                                            <th class="month">JUN</th>
+                                            <th class="month">JUL</th>
+                                            <th class="month">AUG</th>
+                                            <th class="month">SEP</th>
+                                            <th class="month">OCT</th>
+                                            <th class="month">NOV</th>
+                                            <th class="month">DEC</th>
+                                        </tr>
+                                    </thead>
+                                    @for (int j = 0; j < Model.VInList.Count; j++)
+                                    {
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <img src="~/Frontend/Icons/Plus.png" class="expand-icon" />
+                                        </td>
+                                        @Html.HiddenFor(modelItem => Model.VInList[j].Type)
+                                        @Html.HiddenFor(modelItem => Model.VInList[j].ID, new { @class = "hidden-index", data_id = Model.VInList[j].ID, data_type = Model.VInList[j].Type, data_jobno = Model.VInList[j].JobNo })
+                                        <td>
+                                            @Html.DisplayFor(modelItem => Model.VInList[j].JobNo, new { @class = "job-no" })
+                                            @Html.HiddenFor(modelItem => Model.VInList[j].JobNo, new { @class = "job-no" })
+                                        </td>
+                                        <td style="text-align:center">
+                                            <input type="checkbox" />
+                                        </td>
+                                        <td class="month">
+                                            @Html.TextBoxFor(modelItem => Model.VInList[j].JAN, new { @class = "form-control rs" })
+                                        </td>
+                                        <td class="month">
+                                            @Html.TextBoxFor(modelItem => Model.VInList[j].FEB, new { @class = "form-control rs" })
+                                        </td>
+                                        <td class="month">
+                                            @Html.TextBoxFor(modelItem => Model.VInList[j].MAR, new { @class = "form-control rs" })
+                                        </td>
+                                        <td class="month">
+                                            @Html.TextBoxFor(modelItem => Model.VInList[j].APR, new { @class = "form-control rs" })
+                                        </td>
+                                        <td class="month">
+                                            @Html.TextBoxFor(modelItem => Model.VInList[j].MAY, new { @class = "form-control rs" })
+                                        </td>
+                                        <td class="month">
+                                            @Html.TextBoxFor(modelItem => Model.VInList[j].JUN, new { @class = "form-control rs" })
+                                        </td>
+                                        <td class="month">
+                                            @Html.TextBoxFor(modelItem => Model.VInList[j].JUL, new { @class = "form-control rs" })
+                                        </td>
+                                        <td class="month">
+                                            @Html.TextBoxFor(modelItem => Model.VInList[j].AUG, new { @class = "form-control rs" })
+                                        </td>
+                                        <td class="month">
+                                            @Html.TextBoxFor(modelItem => Model.VInList[j].SEP, new { @class = "form-control rs" })
+                                        </td>
+                                        <td class="month">
+                                            @Html.TextBoxFor(modelItem => Model.VInList[j].OCT, new { @class = "form-control rs" })
+                                        </td>
+                                        <td class="month">
+                                            @Html.TextBoxFor(modelItem => Model.VInList[j].NOV, new { @class = "form-control rs" })
+                                        </td>
+                                        <td class="month">
+                                            @Html.TextBoxFor(modelItem => Model.VInList[j].DEC, new { @class = "form-control rs" })
+                                        </td>
+                                       
+                                    </tr>
+
+                                    <tr class="expanded-row" style="display: none;max-width:auto;">
+                                        <td colspan="15" class="expanded-content-container">
+                                            <table id="childTable" class="ChildGrid table table-bordered dtHorizontalExample table-hover text-nowrap table-striped">
+                                                <tbody></tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    </div>}
+            }
+
+            @if (Model.InList != null)
+            {
+                <div class="row pt-3" style="margin: 2px;">
+                    <div class=" p-2 table-responsive" style="overflow-x:auto">
+                        <div class="table-wrapper table-rs">
+                            <table id="tblData" class="table table-bordered dtHorizontalExample table-hover text-nowrap table-striped  table-condensed ">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.JobNo)
+                                        </th>
+                                        <th>
+                                            JOB_C
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.JAN)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.FEB)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.MAR)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.APR)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.MAY)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.JUN)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.JUL)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.AUG)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.SEP)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.OCT)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.NOV)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.MaterialIH.DEC)
+                                        </th>
+                                        <th>
+                                            TOTAL
+                                        </th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.InList != null)
+                                    {
+                                        for (int i = 0; i < Model.InList.Count; i++)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <img src="~/Frontend/Icons/Plus.png" class="expand-icon" />
+                                                </td>
+
+                                                @Html.HiddenFor(modelItem => Model.InList[i].ID, new { @class = "hidden-index", data_id = Model.InList[i].ID, data_type = Model.InList[i].Type, data_jobno = Model.InList[i].JobNo })
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => Model.InList[i].JobNo, new { @class = "job-no" })
+                                                </td>
+                                                <td style="text-align:center">
+                                                    <input type="checkbox" />
+                                                </td>
+
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].JAN, new { @class = "form-control", @id = "jan_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].FEB, new { @class = "form-control", @id = "feb_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].MAR, new { @class = "form-control", @id = "mar_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].APR, new { @class = "form-control", @id = "apr_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].MAY, new { @class = "form-control", @id = "may_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].JUN, new { @class = "form-control", @id = "jun_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].JUL, new { @class = "form-control", @id = "jul_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].AUG, new { @class = "form-control", @id = "aug_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].SEP, new { @class = "form-control", @id = "sept_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].OCT, new { @class = "form-control", @id = "oct_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].NOV, new { @class = "form-control", @id = "nov_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                </td>
+                                                <td>
+                                                    @Html.TextBoxFor(modelItem => Model.InList[i].DEC, new { @class = "form-control", @id = "dec_" + Model.InList[i].ID, style = " max-width: auto;" })
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => Model.InList[i].TOTAL, new { @class = "form-control" })
+                                                </td>
+                                                <td>
+                                                    <input type="submit" class="btn btn-sm btn-primary btn-edit" value="Update" data-id="@Model.InList[i].ID" />
+                                                </td>
+
+                                            </tr>
+                                            <tr class="expanded-row" style="display: none;max-width:auto;">
+                                            <td colspan="15" class="expanded-content-container">
+                                                <table id="childTable" class="ChildGrid table table-bordered dtHorizontalExample table-hover text-nowrap table-striped">
+                                                <tbody></tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                          
+
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </section>
+</body>
+</html>
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+
+  
+
+
+    $(document).ready(function () {
+
+
+        var selectedjobno='';
+
+        $("body").on("click", ".expand-icon", function () {
+            var jobNo = $(this).closest("tr").find("td:eq(1)").text().trim();
+            var Year = @ViewBag.Year;
+            var expandedRow = $(this).closest("tr").next(".expanded-row");
+            var html = '';
+            var dataForO = false;
+            var dataForL = false;
+            if (expandedRow.is(":visible")) {
+                expandedRow.hide();
+                $(this).attr("src", "/Frontend/Icons/Plus.png");
+            } else {
+                $.ajax({
+                    url: '@Url.Action("GetExpandedData",  new { area = "ValueOfWorkDone" })',
+                    type: 'GET',
+                    data: { year: Year, jobNo: jobNo },
+                    success: function (response) {
+                        selectedjobno = jobNo;
+                        if (response.success) {
+                            expandedRow.find(".expanded-content-container").empty();
+                            var html = '';
+                            for (var i = 0; i < response.data.length; i++) {
+                                if (response.data[i].ID == 'O') {
+                                    dataForO = true;
+                                }
+                                else if (response.data[i].ID == 'L') {
+                                    dataForL = true;
+                                }
+                                 if (dataForO && !dataForL) {
+                                    html += '<tr>';
+                                    html += '<td class="tdi"  style="text-align:center; ">' + 'LD Applied ' + '</td>';
+                                    html += '<td class="tdc" style="text-align:center; "><input type="checkbox" /></td>';
+                                    html += '<td ><input type="text" class="form-control txtName" name="JAN"    /></td>';
+                                    html += '<td ><input type="text" class="form-control txtName" name="FEB"    /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="MAR"    /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="APR"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="MAY"  /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="JUN"    /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="JUL"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="AUG"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="SEP"    /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="OCT"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="NOV"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="DEC"    /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="DEC"   /></td>';
+                                    html += '<td  ><input type="submit" class="btn btn-sm btn-primary btn-update" value="Update"   data-id="L"/></td>';
+                                    html += '</tr>';
+
+                                    html += '<tr>';
+                                    html += '<td class="tdi"  style="text-align:center; ">' + 'Oth Misc' + '</td>';
+                                    html += '<td class="tdc" style="text-align:center; "><input type="checkbox" /></td>';
+                                    html += '<td><input type="text" class="form-control txtName" name="JAN" value="' + response.data[i].JAN + '"   /></td>';
+                                    html += '<td ><input type="text" class="form-control txtName" name="FEB" value="' + response.data[i].FEB + '"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="MAR" value="' + response.data[i].MAR + '"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="APR" value="' + response.data[i].APR + '"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="MAY" value="' + response.data[i].MAY + '"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="JUN" value="' + response.data[i].JUN + '"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="JUL" value="' + response.data[i].JUL + '"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="AUG" value="' + response.data[i].AUG + '"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="SEP" value="' + response.data[i].SEP + '"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="OCT" value="' + response.data[i].OCT + '"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="NOV" value="' + response.data[i].NOV + '"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="DEC" value="' + response.data[i].DEC + '"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="DEC" value="' + response.data[i].TOTAL + '"   /></td>';
+                                    html += '<td  ><input type="submit" class="btn btn-sm btn-primary btn-update" value="Update" data-id="' + response.data[i].ID + '" /></td>';
+                                    html += '</tr>';
+                                }
+                                else if (!dataForO && dataForL) {
+                                    html += '<tr>';
+                                    html += '<td class="tdi"  style="text-align:center; ">' + 'LD Applied ' + '</td>';
+                                    html += '<td class="tdc" style="text-align:center; "><input type="checkbox" /></td>';
+                                    html += '<td ><input type="text" class="form-control txtName" name="JAN" value="' + response.data[i].JAN + '"   /></td>';
+                                    html += '<td ><input type="text" class="form-control txtName" name="FEB" value="' + response.data[i].FEB + '"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="MAR" value="' + response.data[i].MAR + '"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="APR" value="' + response.data[i].APR + '"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="MAY" value="' + response.data[i].MAY + '"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="JUN" value="' + response.data[i].JUN + '"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="JUL" value="' + response.data[i].JUL + '"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="AUG" value="' + response.data[i].AUG + '"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="SEP" value="' + response.data[i].SEP + '"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="OCT" value="' + response.data[i].OCT + '"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="NOV" value="' + response.data[i].NOV + '"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="DEC" value="' + response.data[i].DEC + '"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="DEC" value="' + response.data[i].TOTAL + '"   /></td>';
+                                    html += '<td  ><input type="submit" class="btn btn-sm btn-primary btn-update" value="Update" data-id="' + response.data[i].ID + '" /></td>';
+                                    html += '</tr>';
+
+                                    html += '<tr>';
+                                    html += '<td class="tdi"  style="text-align:center; ">' + 'Oth Misc ' + '</td>';
+                                    html += '<td class="tdc" style="text-align:center; "><input type="checkbox" /></td>';
+                                    html += '<td ><input type="text" class="form-control txtName" name="JAN"    /></td>';
+                                    html += '<td ><input type="text" class="form-control txtName" name="FEB"    /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="MAR"    /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="APR"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="MAY"  /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="JUN"    /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="JUL"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="AUG"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="SEP"    /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="OCT"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="NOV"   /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="DEC"    /></td>';
+                                    html += '<td  ><input type="text" class="form-control txtName" name="DEC"   /></td>';
+                                    html += '<td  ><input type="submit" class="btn btn-sm btn-primary btn-update" value="Update"   data-id="O"/></td>';
+                                    html += '</tr>';
+                                   
+                                }
+                               else if (dataForO || dataForL) {
+                                    if (response.data[i].ID == 'L') {
+                                        html += '<tr>';
+                                        html += '<td class="tdi"  style="text-align:center; ">' + 'LD Applied ' + '</td>';
+                                        html += '<td class="tdc" style="text-align:center; "><input type="checkbox" /></td>';
+                                        html += '<td ><input type="text" class="form-control txtName" name="JAN" value="' + response.data[i].JAN + '"   /></td>';
+                                        html += '<td ><input type="text" class="form-control txtName" name="FEB" value="' + response.data[i].FEB + '"   /></td>';
+                                        html += '<td  ><input type="text" class="form-control txtName" name="MAR" value="' + response.data[i].MAR + '"   /></td>';
+                                        html += '<td  ><input type="text" class="form-control txtName" name="APR" value="' + response.data[i].APR + '"   /></td>';
+                                        html += '<td  ><input type="text" class="form-control txtName" name="MAY" value="' + response.data[i].MAY + '"   /></td>';
+                                        html += '<td  ><input type="text" class="form-control txtName" name="JUN" value="' + response.data[i].JUN + '"   /></td>';
+                                        html += '<td  ><input type="text" class="form-control txtName" name="JUL" value="' + response.data[i].JUL + '"   /></td>';
+                                        html += '<td  ><input type="text" class="form-control txtName" name="AUG" value="' + response.data[i].AUG + '"   /></td>';
+                                        html += '<td  ><input type="text" class="form-control txtName" name="SEP" value="' + response.data[i].SEP + '"   /></td>';
+                                        html += '<td  ><input type="text" class="form-control txtName" name="OCT" value="' + response.data[i].OCT + '"   /></td>';
+                                        html += '<td  ><input type="text" class="form-control txtName" name="NOV" value="' + response.data[i].NOV + '"   /></td>';
+                                        html += '<td  ><input type="text" class="form-control txtName" name="DEC" value="' + response.data[i].DEC + '"   /></td>';
+                                        html += '<td  ><input type="text" class="form-control txtName" name="DEC" value="' + response.data[i].TOTAL + '"   /></td>';
+                                        html += '<td  ><input type="submit" class="btn btn-sm btn-primary btn-update" value="Update" data-id="' + response.data[i].ID + '" /></td>';
+                                        html += '</tr>';
+                                    }
+
+                                    else if (response.data[i].ID == 'O') {
+                                        html += '<tr>';
+                                        html += '<td class="tdi"  style="text-align:center; ">' + 'Oth Misc ' + '</td>';
+                                        html += '<td class="tdc" style="text-align:center; "><input type="checkbox" /></td>';
+                                        html += '<td ><input type="text" class="form-control txtName" name="JAN" value="' + response.data[i].JAN + '"   /></td>';
+                                        html += '<td ><input type="text" class="form-control txtName" name="FEB" value="' + response.data[i].FEB + '"   /></td>';
+                                        html += '<td  ><input type="text" class="form-control txtName" name="MAR" value="' + response.data[i].MAR + '"   /></td>';
+                                        html += '<td  ><input type="text" class="form-control txtName" name="APR" value="' + response.data[i].APR + '"   /></td>';
+                                        html += '<td  ><input type="text" class="form-control txtName" name="MAY" value="' + response.data[i].MAY + '"   /></td>';
+                                        html += '<td  ><input type="text" class="form-control txtName" name="JUN" value="' + response.data[i].JUN + '"   /></td>';
+                                        html += '<td  ><input type="text" class="form-control txtName" name="JUL" value="' + response.data[i].JUL + '"   /></td>';
+                                        html += '<td  ><input type="text" class="form-control txtName" name="AUG" value="' + response.data[i].AUG + '"   /></td>';
+                                        html += '<td  ><input type="text" class="form-control txtName" name="SEP" value="' + response.data[i].SEP + '"   /></td>';
+                                        html += '<td  ><input type="text" class="form-control txtName" name="OCT" value="' + response.data[i].OCT + '"   /></td>';
+                                        html += '<td  ><input type="text" class="form-control txtName" name="NOV" value="' + response.data[i].NOV + '"   /></td>';
+                                        html += '<td  ><input type="text" class="form-control txtName" name="DEC" value="' + response.data[i].DEC + '"   /></td>';
+                                        html += '<td  ><input type="text" class="form-control txtName" name="DEC" value="' + response.data[i].TOTAL + '"   /></td>';
+                                        html += '<td  ><input type="submit" class="btn btn-sm btn-primary btn-update" value="Update" data-id="' + response.data[i].ID + '" /></td>';
+                                        html += '</tr>';
+                                    }
+                                }
+                            }
+                            if (!dataForO && !dataForL) {
+                                html += '<tr>';
+                                html += '<td class="tdi"  style="text-align:center; ">' + 'LD Applied ' + '</td>';
+                                html += '<td class="tdc" style="text-align:center; "><input type="checkbox" /></td>';
+                                html += '<td ><input type="text" class="form-control txtName" name="JAN"    /></td>';
+                                html += '<td ><input type="text" class="form-control txtName" name="FEB"    /></td>';
+                                html += '<td  ><input type="text" class="form-control txtName" name="MAR"    /></td>';
+                                html += '<td  ><input type="text" class="form-control txtName" name="APR"   /></td>';
+                                html += '<td  ><input type="text" class="form-control txtName" name="MAY"   /></td>';
+                                html += '<td  ><input type="text" class="form-control txtName" name="JUN" /></td>';
+                                html += '<td  ><input type="text" class="form-control txtName" name="JUL"  /></td>';
+                                html += '<td  ><input type="text" class="form-control txtName" name="AUG"  /></td>';
+                                html += '<td  ><input type="text" class="form-control txtName" name="SEP"    /></td>';
+                                html += '<td  ><input type="text" class="form-control txtName" name="OCT"  /></td>';
+                                html += '<td  ><input type="text" class="form-control txtName" name="NOV"   /></td>';
+                                html += '<td  ><input type="text" class="form-control txtName" name="DEC"   /></td>';
+                                html += '<td  ><input type="text" class="form-control txtName" name="DEC"   /></td>';
+                                html += '<td  ><input type="submit" class="btn btn-sm btn-success btn-update" value="Save"  data-id="L"/></td>';
+                                html += '</tr>';
+
+                                html += '<tr>';
+                                html += '<td class="tdi"  style="text-align:center; ">' + 'Oth Misc ' + '</td>';
+                                html += '<td class="tdc" style="text-align:center; "><input type="checkbox" /></td>';
+                                html += '<td ><input type="text" class="form-control txtName" name="JAN"    /></td>';
+                                html += '<td ><input type="text" class="form-control txtName" name="FEB"    /></td>';
+                                html += '<td  ><input type="text" class="form-control txtName" name="MAR"    /></td>';
+                                html += '<td  ><input type="text" class="form-control txtName" name="APR"   /></td>';
+                                html += '<td  ><input type="text" class="form-control txtName" name="MAY"  /></td>';
+                                html += '<td  ><input type="text" class="form-control txtName" name="JUN"    /></td>';
+                                html += '<td  ><input type="text" class="form-control txtName" name="JUL"   /></td>';
+                                html += '<td  ><input type="text" class="form-control txtName" name="AUG"   /></td>';
+                                html += '<td  ><input type="text" class="form-control txtName" name="SEP"    /></td>';
+                                html += '<td  ><input type="text" class="form-control txtName" name="OCT"   /></td>';
+                                html += '<td  ><input type="text" class="form-control txtName" name="NOV"   /></td>';
+                                html += '<td  ><input type="text" class="form-control txtName" name="DEC"    /></td>';
+                                html += '<td  ><input type="text" class="form-control txtName" name="DEC"   /></td>';
+                                html += '<td  ><input type="submit" class="btn btn-sm btn-success btn-update" value="Save"   data-id="O"/></td>';
+                                html += '</tr>';
+                            }
+                            expandedRow.find(".expanded-content-container").html(html);
+                            expandedRow.show();
+                        }
+                        else {                  
+                            console.error('Error fetching data:', response.message);
+                        }
+                    },
+                    error: function () {
+                       
+                        console.error('Error fetching data.');
+                    }
+                });
+                $(this).attr("src", "/Frontend/Icons/Minus.png");
+            }
+        });
+
+        
+        //Update data into database
+
+        $('#tblData').on('click', '.btn-update', function () {
+            console.log("update");
+                var row = $(this).closest('tr');
+               var item = {
+                ID : $(this).data('id'),
+                Type: 'IN',
+                JAN: row.find('input[name="JAN"]').val(),
+                FEB: row.find('input[name="FEB"]').val(),
+                MAR: row.find('input[name="MAR"]').val(),
+                APR: row.find('input[name="APR"]').val(),
+                MAY: row.find('input[name="MAY"]').val(),
+                JUN: row.find('input[name="JUN"]').val(),
+                JUL: row.find('input[name="JUL"]').val(),
+                AUG: row.find('input[name="AUG"]').val(),
+                SEP: row.find('input[name="SEP"]').val(),
+                OCT: row.find('input[name="OCT"]').val(),
+                NOV: row.find('input[name="NOV"]').val(),
+                DEC : row.find('input[name="DEC"]').val(),
+
+            };
+                       var dataToSend = {
+                    year: '@ViewBag.Year',
+                    job: '@ViewBag.Job',
+                     jobNo: selectedjobno,
+                    InList: []
+            };
+            dataToSend.InList.push(item);
+                $.ajax({
+                    url: '@Url.Action("Index", "VOWD", new { area = "ValueOfWorkDone" })',
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(dataToSend),
+                    success: function (data) {
+                        console.log("UPdated");
+                    },
+                    error: function (error) {
+                        console.error(error);
+                    }
+                });
+            });
+
+
+        $('#tblData').on('click', '.btn-edit', function () {
+            var row = $(this).closest('tr');
+            var id = $(this).data('id');
+            var type = row.find('.hidden-index').data('type');
+            var jobno = row.find('.hidden-index').data('jobno');
+            var jan = row.find("#jan_" + id).val();
+            var feb = row.find("#feb_" + id).val();
+            var mar = row.find("#mar_" + id).val();
+            var apr = row.find("#apr_" + id).val();
+            var may = row.find("#may_" + id).val();
+            var jun = row.find("#jun_" + id).val();
+            var jul = row.find("#jul_" + id).val();
+            var aug = row.find("#aug_" + id).val();
+            var sept = row.find("#sept_" + id).val();
+            var oct = row.find("#oct_" + id).val();
+            var nov = row.find("#nov_" + id).val();
+            var dec = row.find("#dec_" + id).val();
+            var dataToSend = {
+                year: '@ViewBag.Year',
+                jobno: jobno,
+                job: '@ViewBag.Job',
+                InList: [{
+                    ID: id,
+                    Type: type,
+                    JAN: jan,
+                    FEB: feb,
+                    MAR: mar,
+                    APR: apr,
+                    MAY: may,
+                    JUN: jun,
+                    JUL: jul,
+                    AUG: aug,
+                    SEP: sept,
+                    OCT: oct,
+                    NOV: nov,
+                    DEC: dec,
+                }]
+            };
+            $.ajax({
+                url: '@Url.Action("Index", "VOWD", new { area = "ValueOfWorkDone" })',
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(dataToSend),
+                success: function (data) {
+                    console.log("UPdated");
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        });
+
+    });
+
+
+
+
+
+</script>

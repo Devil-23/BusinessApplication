@@ -1,0 +1,144 @@
+﻿@model BusinessApplication.ViewModels.MultipleVM
+
+@{ ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">User Profile</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-auto" style="display:flex">
+                    @using (Html.BeginForm("SearchByName", "UserAuthorization", FormMethod.Post))
+                    {
+                        @:BP_USER @Html.DropDownList("BP_USER")
+                        <input type="submit" value="Search" class="btn btn-primary" />}
+                </div>
+            </div>
+            @using (Html.BeginForm("Index", "UserAuthorization", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-auto">
+                        <input type="submit" class="btn btn-blue-sap" value="Save" />
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" id="searchInput" class="form-control" placeholder="Search JobNo">
+                    </div>
+                    <div class="col-auto">
+                        <select id="rowsPerPageSelect" class="form-control">
+                            <option>Select Rows Per Page</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
+                </div>
+                <table id="tbl1" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Job No</th>
+                            <th>BP Read</th>
+                            <th>BP Write</th>
+                            <th>AC Read</th>
+                            <th>AC Write</th>
+                            <th>PJ Read</th>
+                            <th>PJ Write</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ Model.PermList = Model.PermList.GroupBy(item => item.JOB_NO).Select(group => group.First()).ToList(); }
+
+                        @for (var i = 0; i < Model.PermList.Count; i++)
+                        {
+                            <tr class="job-row">
+                                <td>
+                                    @Html.HiddenFor(model => model.PermList[i].JOB_NO)
+                                    @Html.DisplayFor(model => model.PermList[i].JOB_NO)
+                                </td>
+                                <td>@Html.CheckBoxFor(model => model.PermList[i].BP_READ)</td>
+                                <td>@Html.CheckBoxFor(model => model.PermList[i].BP_WRITE)</td>
+                                <td>@Html.CheckBoxFor(model => model.PermList[i].MN_READ)</td>
+                                <td>@Html.CheckBoxFor(model => model.PermList[i].MN_WRITE)</td>
+                                <td>@Html.CheckBoxFor(model => model.PermList[i].PJ_READ)</td>
+                                <td>@Html.CheckBoxFor(model => model.PermList[i].PJ_WRITE)</td>
+                            </tr>
+}
+                    </tbody>
+                </table>
+                <div id="pagination">
+                    <button id="prevPage">Previous</button>
+                    <button id="nextPage">Next</button>
+                    <span id="pageInfo"></span>
+                </div>}
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var rowsPerPage = 10;
+            var currentPage = 0;
+
+            function updateTable() {
+                var rows = $('.job-row');
+                var totalRows = rows.length;
+                var totalPages = Math.ceil(totalRows / rowsPerPage);
+                $('#pageInfo').text("Page " + (currentPage + 1) + " of " + totalPages);
+
+                rows.hide().slice(currentPage * rowsPerPage, (currentPage + 1) * rowsPerPage).show();
+            }
+
+            $('#prevPage').on('click', function () {
+                if (currentPage > 0) {
+                    currentPage--;
+                    updateTable();
+                }
+            });
+
+            $('#nextPage').on('click', function () {
+                var rows = $('.job-row');
+                var totalRows = rows.length;
+                var totalPages = Math.ceil(totalRows / rowsPerPage);
+
+                if (currentPage < totalPages - 1) {
+                    currentPage++;
+                    updateTable();
+                }
+            });
+
+            $('#rowsPerPageSelect').on('change', function () {
+                rowsPerPage = parseInt($(this).val());
+                currentPage = 0;
+                updateTable();
+            });
+
+            updateTable();
+
+            function showAllRows() {
+                $('.job-row').show();
+            }
+
+            // Function to handle search input
+            $('#searchInput').on('input', function () {
+                var value = $(this).val().toLowerCase();
+                $('.job-row').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+
+            // Show all rows initially
+            showAllRows();
+        });
+    </script>
+
+</body>
+</html>
